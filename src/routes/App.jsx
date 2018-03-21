@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import FacebookBtn from './FacebookBtn.jsx';
+import FacebookLoginStatus from '../components/FacebookLoginStatus.jsx';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <FacebookBtn/>
+        <FacebookLoginStatus/>
       </div>
     );
   }

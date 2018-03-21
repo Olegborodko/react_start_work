@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
-import Dashboard from './components/Dashboard.jsx';
 import registerServiceWorker from './registerServiceWorker';
 import './styles/index.scss';
 import {
   BrowserRouter as Router,
   Route,
   Link
-} from 'react-router-dom'
+} from 'react-router-dom';
+
+import App from './routes/App.jsx';
+import Dashboard from './routes/Dashboard.jsx';
 
 ReactDOM.render(
   <Router>
