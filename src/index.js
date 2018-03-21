@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.jsx';
-import Dashboard from './Dashboard.jsx';
+import App from './components/App.jsx';
+import Dashboard from './components/Dashboard.jsx';
 import registerServiceWorker from './registerServiceWorker';
-import './index.scss';
+import './styles/index.scss';
 import {
   BrowserRouter as Router,
   Route,
