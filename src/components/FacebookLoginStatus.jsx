@@ -48,7 +48,7 @@ class FacebookLoginStatus extends Component {
   statusChangeCallback(response){
     console.log(response['status']);
     if (response['status']==="connected"){
-      if (window.location.pathname!==this.props.linkToDashboard){
+      if (window.location.pathname===this.props.linkToLogin){
         window.location = this.props.linkToDashboard;
       }
     }else{

@@ -4,7 +4,7 @@ class FacebookBtn extends Component {
   render() {
     return (
       <div className="test">
-         Test
+         FacebookBtn
       </div>
     );
   }
