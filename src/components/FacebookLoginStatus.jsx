@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class FacebookLoginStatus extends Component {
+  static propTypes = {
+    facebookApi: PropTypes.string.isRequired,
+    linkToDashboard: PropTypes.string.isRequired,
+    linkToLogin: PropTypes.string.isRequired
+  };
+
   constructor(props) {
     super(props);
     //const data = props.data;
@@ -16,7 +23,7 @@ class FacebookLoginStatus extends Component {
 
     window.fbAsyncInit = function(){
       window.FB.init({
-        appId      : process.env.FACEBOOK_API,
+        appId      : this_.props.facebookApi,
         cookie     : true,
         xfbml      : true,
         version    : 'v2.12'
@@ -41,9 +48,11 @@ class FacebookLoginStatus extends Component {
   statusChangeCallback(response){
     console.log(response['status']);
     if (response['status']==="connected"){
-      //window.location.href = gon.dashboard_path;
+      if (window.location.pathname!==this.props.linkToDashboard){
+        window.location = this.props.linkToDashboard;
+      }
     }else{
-      //console.log(response['status']);
+      window.location = this.props.linkToLogin;
     }
   }
 
@@ -57,9 +66,7 @@ class FacebookLoginStatus extends Component {
 
   render() {
     return (
-    <div>
-
-    </div>
+    <div></div>
     );
   }
 }

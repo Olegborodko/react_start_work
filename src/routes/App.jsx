@@ -5,7 +5,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <FacebookLoginStatus/>
+        <FacebookLoginStatus
+          facebookApi={ process.env.FACEBOOK_API }
+          linkToDashboard = '/dashboard'
+          linkToLogin = '/'
+        />
       </div>
     );
   }
