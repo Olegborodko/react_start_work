@@ -12,7 +12,6 @@ class FacebookLoginStatus extends Component {
   }
 
   componentDidMount(){
-    console.log(process.env.FACEBOOK_API);
     var this_ = this;
 
     window.fbAsyncInit = function(){
