@@ -34,7 +34,11 @@ class FacebookLoginStatus extends Component {
       window.FB.getLoginStatus(function(response) {
         this_.statusChangeCallback(response);
       });
-    };
+
+      window.FB.Event.subscribe('auth.statusChange', (response) => {
+        this_.statusChangeCallback(response);
+      });
+    }.bind(this);
 
     (function(d, s, id){
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -52,17 +56,11 @@ class FacebookLoginStatus extends Component {
         window.location = this.props.linkToDashboard;
       }
     }else{
-      window.location = this.props.linkToLogin;
+      if (window.location.pathname!==this.props.linkToLogin) {
+        window.location = this.props.linkToLogin;
+      }
     }
   }
-
-  // statusCheck(){
-  //   var status = '';
-  //   window.FB.getLoginStatus(function(response) {
-  //     status = response;
-  //   });
-  //   return status;
-  // }
 
   render() {
     return (
