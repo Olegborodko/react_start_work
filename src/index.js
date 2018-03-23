@@ -12,10 +12,32 @@ import {
 import App from './routes/App.jsx';
 import Dashboard from './routes/Dashboard.jsx';
 import Page404 from './routes/Page404';
+import Test from './routes/Test.jsx';
 
 import MainLayout from './layouts/MainLayout';
 import Null from './layouts/Null';
 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+
+//============state part
+const initialState = {
+  testArray: ['1', '2']
+};
+
+function ssss(state=initialState, action){
+  if (action.type === 'ADD_TRACK'){
+    state.testArray.push(action.payload);
+    return {
+      ...state
+    }
+  }
+  return state;
+}
+
+const store = createStore(ssss);
+
+//===========layouts part
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route {...rest} render={props => (
     <Layout>
@@ -25,13 +47,16 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
 );
 
 ReactDOM.render(
+  <Provider store={store}>
   <Router>
     <Switch>
       <AppRoute exact path="/" layout={MainLayout} component={App} />
       <AppRoute exact path="/dashboard" layout={MainLayout} component={Dashboard} />
+      <AppRoute exact path="/test" layout={MainLayout} component={Test} />
       <AppRoute layout={Null} component={Page404} />
     </Switch>
-  </Router>,
+  </Router>
+  </Provider>,
   document.getElementById('root')
 );
 registerServiceWorker();
