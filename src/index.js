@@ -21,21 +21,9 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 //============state part
-const initialState = {
-  testArray: ['1', '2']
-};
+import reducer from './reducers';
 
-function ssss(state=initialState, action){
-  if (action.type === 'ADD_TRACK'){
-    state.testArray.push(action.payload);
-    return {
-      ...state
-    }
-  }
-  return state;
-}
-
-const store = createStore(ssss);
+const store = createStore(reducer);
 
 //===========layouts part
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (

@@ -20,7 +20,7 @@ class MainLayout extends Component {
       linkToLogin = '/'
       />
       <ul>
-        { this.props.globalState['testArray'].map((track, index) =>
+        { this.props.globalState.map((track, index) =>
         <li key={index}>{track}</li>
         )}
       </ul>
@@ -34,11 +34,11 @@ class MainLayout extends Component {
 
 export default connect(
   state => ({
-    globalState: state
+    globalState: state.testArray
   }),
   dispatch => ({
     onAddTrack: (trackName) => {
-      dispatch({ type: 'ADD_TRACK', payload: trackName });
+      dispatch({ type: 'ADD_ARRAY', payload: trackName });
     }
   })
 )(MainLayout);
