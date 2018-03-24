@@ -6,7 +6,8 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  Switch
+  Switch,
+  HashRouter
 } from 'react-router-dom';
 
 import App from './routes/App.jsx';
@@ -36,14 +37,16 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
 
 ReactDOM.render(
   <Provider store={store}>
-  <Router>
-    <Switch>
-      <AppRoute exact path="/" layout={MainLayout} component={App} />
-      <AppRoute exact path="/dashboard" layout={MainLayout} component={Dashboard} />
-      <AppRoute exact path="/test" layout={MainLayout} component={Test} />
-      <AppRoute layout={Null} component={Page404} />
-    </Switch>
-  </Router>
+    <HashRouter>
+      <Router>
+        <Switch>
+          <AppRoute exact path="/" layout={MainLayout} component={App} />
+          <AppRoute exact path="/dashboard" layout={MainLayout} component={Dashboard} />
+          <AppRoute exact path="/test" layout={MainLayout} component={Test} />
+          <AppRoute layout={Null} component={Page404} />
+        </Switch>
+      </Router>
+    </HashRouter>
   </Provider>,
   document.getElementById('root')
 );
