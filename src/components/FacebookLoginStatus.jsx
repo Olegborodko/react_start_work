@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class FacebookLoginStatus extends Component {
   static propTypes = {
@@ -50,8 +51,11 @@ class FacebookLoginStatus extends Component {
   }
 
   statusChangeCallback(response){
-    console.log(response['status']);
+    //console.log(response['status']);
     if (response['status']==="connected"){
+      this.props.setToken(response.authResponse.accessToken);
+      this.props.initialApiTrue(true);
+
       if (window.location.pathname===this.props.linkToLogin){
         window.location = this.props.linkToDashboard;
       }
@@ -69,4 +73,19 @@ class FacebookLoginStatus extends Component {
   }
 }
 
-export default FacebookLoginStatus;
+export default connect(
+state => ({
+  initialApi: state.initialApi.access
+}),
+dispatch => ({
+  initialApiTrue: (trackName) => {
+    dispatch({type: 'TRUE', payload: trackName });
+  },
+  initialApiFalse: (trackName) => {
+    dispatch({type: 'FALSE', payload: trackName });
+  },
+  setToken: (trackName) => {
+    dispatch({type: 'TOKEN', payload: trackName });
+  }
+})
+)(FacebookLoginStatus);

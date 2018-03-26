@@ -12,20 +12,21 @@ class MainLayout extends Component {
   render() {
     return (
     <div>
-      {console.log(this.props.globalState)}
+      {/*console.log(this.props.globalState) */}
       <FacebookBtn/>
+      <br/><br/>
       <FacebookLoginStatus
       facebookApi={ process.env.FACEBOOK_API }
       linkToDashboard = '/dashboard'
       linkToLogin = '/'
       />
-      <ul>
+      {/*<ul>
         { this.props.globalState.map((track, index) =>
         <li key={index}>{track}</li>
         )}
       </ul>
       <button onClick={this.addFunc.bind(this)}>Add Track</button>
-
+      */}
       {this.props.children}
     </div>
     );

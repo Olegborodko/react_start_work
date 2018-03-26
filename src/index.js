@@ -26,6 +26,9 @@ import reducer from './reducers';
 
 const store = createStore(reducer);
 
+//temp
+window.store = store;
+
 //===========layouts part
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route {...rest} render={props => (
