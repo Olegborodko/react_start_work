@@ -11,15 +11,11 @@ class FacebookLoginStatus extends Component {
 
   constructor(props) {
     super(props);
-    //const data = props.data;
-    //this.state = {
-    //  bounty_program: 0
-    //};
 
     this.statusChangeCallback = this.statusChangeCallback.bind(this);
   }
 
-  componentDidMount(){
+  componentWillMount(){
     var this_ = this;
 
     window.fbAsyncInit = function(){
@@ -39,7 +35,7 @@ class FacebookLoginStatus extends Component {
       window.FB.Event.subscribe('auth.statusChange', (response) => {
         this_.statusChangeCallback(response);
       });
-    }.bind(this);
+    };
 
     (function(d, s, id){
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -51,10 +47,17 @@ class FacebookLoginStatus extends Component {
   }
 
   statusChangeCallback(response){
-    //console.log(response['status']);
     if (response['status']==="connected"){
-      this.props.setToken(response.authResponse.accessToken);
-      this.props.initialApiTrue(true);
+      var this_ = this;
+
+      window.FB.api('/me/adaccounts?fields=name', 'get', {access_token: response.authResponse.accessToken}, (response) => {
+        if (response.error) {
+          console.log(response.error)
+        }else{
+          this_.props.g_Users(response.data);
+          this_.props.g_TriggerUser(true);
+        }
+      });
 
       if (window.location.pathname===this.props.linkToLogin){
         window.location = this.props.linkToDashboard;
@@ -75,17 +78,14 @@ class FacebookLoginStatus extends Component {
 
 export default connect(
 state => ({
-  initialApi: state.initialApi.access
+
 }),
 dispatch => ({
-  initialApiTrue: (trackName) => {
-    dispatch({type: 'TRUE', payload: trackName });
+  g_Users: (trackName) => {
+    dispatch({ type: 'USERS_CHANGE', payload: trackName });
   },
-  initialApiFalse: (trackName) => {
-    dispatch({type: 'FALSE', payload: trackName });
-  },
-  setToken: (trackName) => {
-    dispatch({type: 'TOKEN', payload: trackName });
+  g_TriggerUser: (trackName) => {
+    dispatch({ type: 'USERS_REQUEST', payload: trackName });
   }
 })
 )(FacebookLoginStatus);

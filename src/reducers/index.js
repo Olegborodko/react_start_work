@@ -3,11 +3,17 @@ import { routerReducer } from 'react-router-redux'
 
 import testArray from './testArray.js';
 import testArray2 from './testArray2.js';
-import initialApi from './initialApi.js';
+import users from './users.js';
+import currentId from './currentId.js';
+import campaigns from './campaigns.js';
+import trigger from './trigger.js';
 
 export default combineReducers({
   routing: routerReducer,
-  initialApi,
   testArray,
-  testArray2
+  testArray2,
+  users,
+  currentId,
+  campaigns,
+  trigger
 });

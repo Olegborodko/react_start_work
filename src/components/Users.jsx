@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Users extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data: [],
-    };
+    this.selectChange = this.selectChange.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     // window.FB.Event.subscribe('auth.statusChange', (response) => {
     //
     // });
@@ -22,35 +21,54 @@ class Users extends Component {
       if (response.error) {
         console.log(response.error)
       }else{
-        this_.setState({
-          data: response.data
-        });
+        this_.props.globalStateChange(response.data);
       }
-
     });
     //console.log(window.FB);
-
     //console.log(window.store.getState());
   }
 
+  selectChange(event){
+    this.props.globalCurrentUserChange(event.target.value);
+    this.props.globalUserTrigger(true);
+  }
+
   render() {
-    const {data} = this.state;
+    const {usersGlobal, globalCurrentUser} = this.props;
+    // if (access){
+    //   this.request();
+    // }
     //const {search_by_name, data_by_name, data, bounty_program} = this.state;
     return (
     <div>
-      <select>
-      {data.length>0 && data.map((key, idx) => {
-        return (
-        <option key={idx} value={key.name}>
-          {key.name}
-        </option>
-        );
-      })}
-
+      <select onChange={this.selectChange} value={globalCurrentUser.user}>
+        {usersGlobal.map((key, idx) => {
+          return (
+          <option key={idx} value={idx}>
+            {key.name}
+          </option>
+          );
+        })}
       </select>
     </div>
     );
   }
 }
 
-export default Users;
+export default connect(
+state => ({
+  usersGlobal: state.users,
+  globalCurrentUser: state.currentId
+}),
+dispatch => ({
+  globalStateChange: (trackName) => {
+    dispatch({ type: 'USERS_CHANGE', payload: trackName });
+  },
+  globalCurrentUserChange: (trackName) => {
+    dispatch({ type: 'CURRENT_USER_CHANGE', payload: trackName });
+  },
+  globalUserTrigger: (trackName) => {
+    dispatch({ type: 'USER_STATUS', payload: trackName });
+  }
+})
+)(Users);

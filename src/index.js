@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 import './styles/index.scss';
 import {
   BrowserRouter as Router,
@@ -19,15 +21,16 @@ import MainLayout from './layouts/MainLayout';
 import Null from './layouts/Null';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
 //============state part
 import reducer from './reducers';
 
-const store = createStore(reducer);
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 //temp
-window.store = store;
+//window.store = store;
+//console.log(window.store.getState())
 
 //===========layouts part
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
