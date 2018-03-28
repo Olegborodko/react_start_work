@@ -6,7 +6,6 @@ import testArray2 from './testArray2.js';
 import users from './users.js';
 import currentId from './currentId.js';
 import campaigns from './campaigns.js';
-import trigger from './trigger.js';
 
 export default combineReducers({
   routing: routerReducer,
@@ -14,6 +13,5 @@ export default combineReducers({
   testArray2,
   users,
   currentId,
-  campaigns,
-  trigger
+  campaigns
 });

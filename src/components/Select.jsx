@@ -11,10 +11,6 @@ class Select extends Component {
     this.selectChange = this.selectChange.bind(this);
   }
 
-  componentDidMount(){
-
-  }
-
   selectChange(event){
     this.props.changeUser(event.target.value);
     this.setState({
@@ -28,6 +24,7 @@ class Select extends Component {
 
     return (
     <div>
+      {data.length > 0 &&
       <select onChange={this.selectChange} value={selectValue}>
         {data.map((key, idx) => {
           return (
@@ -37,6 +34,7 @@ class Select extends Component {
           );
         })}
       </select>
+      }
     </div>
     );
   }

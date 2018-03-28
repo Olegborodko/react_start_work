@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { g_campaignsRequest } from '../actions/campaigns';
 
 class FacebookLoginStatus extends Component {
   static propTypes = {
@@ -55,7 +56,7 @@ class FacebookLoginStatus extends Component {
           console.log(response.error)
         }else{
           this_.props.g_Users(response.data);
-          this_.props.g_TriggerUser(true);
+          this_.props.g_compaignsRequest(response.data, 0);
         }
       });
 
@@ -84,8 +85,8 @@ dispatch => ({
   g_Users: (trackName) => {
     dispatch({ type: 'USERS_CHANGE', payload: trackName });
   },
-  g_TriggerUser: (trackName) => {
-    dispatch({ type: 'USERS_REQUEST', payload: trackName });
+  g_compaignsRequest: (g_users, userId) => {
+    dispatch(g_campaignsRequest(g_users, userId));
   }
 })
 )(FacebookLoginStatus);

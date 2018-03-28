@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import Users from './Users';
-import Campaigns from './Campaigns';
 import Select from './Select';
-import Requests from './Requests';
 import { connect } from 'react-redux';
+import { g_campaignsRequest } from '../actions/campaigns';
 
 class selectPanel extends Component {
   constructor(props) {
@@ -13,32 +11,37 @@ class selectPanel extends Component {
     };
 
     this.changeUser = this.changeUser.bind(this);
+    this.changeCampaign = this.changeCampaign.bind(this);
   }
 
   changeUser(userId){
+    this.props.g_compaignsRequest(this.props.g_users, userId);
     this.setState({
       userId: userId
     });
   }
 
+  changeCampaign(){
+
+  }
+
   render() {
-    const {usersGlobal} = this.props;
+    const {g_users, g_campaigns} = this.props;
 
     return (
     <div>
       <div>
         <Select
-          data={usersGlobal}
+          data={ g_users }
           changeUser = { this.changeUser }
         />
-        {/*<Users token={this.props.initialApi.token}/>*/}
-        {/*<br/>*/}
-        {/*<br/>*/}
-        {/*{usersGlobal.length>0 &&*/}
-        {/*<Campaigns/>*/}
-        {/*}*/}
+        <br/>
+        <br/>
+        <Select
+        data={ g_campaigns }
+        changeUser = { this.changeCampaign }
+        />
       </div>
-      <Requests/>
     </div>
     );
   }
@@ -46,7 +49,12 @@ class selectPanel extends Component {
 
 export default connect(
 state => ({
-  usersGlobal: state.users,
-  campaignsGlobal: state.campaigns
+  g_users: state.users,
+  g_campaigns: state.campaigns
+}),
+dispatch => ({
+  g_compaignsRequest: (g_users, userId) => {
+    dispatch(g_campaignsRequest(g_users, userId));
+  }
 })
 )(selectPanel);
