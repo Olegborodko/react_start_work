@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom';
 
 import App from './routes/App.jsx';
+import Login from './routes/Login';
 import Dashboard from './routes/Dashboard.jsx';
 import Page404 from './routes/Page404';
 import Test from './routes/Test.jsx';
@@ -46,7 +47,7 @@ ReactDOM.render(
     <HashRouter>
       <Router>
         <Switch>
-          <AppRoute exact path="/" layout={MainLayout} component={App} />
+          <AppRoute exact path="/" layout={Null} component={Login} />
           <AppRoute exact path="/dashboard" layout={MainLayout} component={Dashboard} />
           <AppRoute exact path="/test" layout={MainLayout} component={Test} />
           <AppRoute layout={Null} component={Page404} />

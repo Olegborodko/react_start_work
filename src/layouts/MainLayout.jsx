@@ -5,14 +5,10 @@ import FacebookLoginStatus from '../components/FacebookLoginStatus.jsx';
 import { connect } from 'react-redux';
 
 class MainLayout extends Component {
-  addFunc(){
-    this.props.onAddTrack('3');
-  }
 
   render() {
     return (
     <div>
-      {/*console.log(this.props.globalState) */}
       <FacebookBtn/>
       <br/><br/>
       <FacebookLoginStatus
@@ -20,13 +16,6 @@ class MainLayout extends Component {
       linkToDashboard = '/dashboard'
       linkToLogin = '/'
       />
-      {/*<ul>
-        { this.props.globalState.map((track, index) =>
-        <li key={index}>{track}</li>
-        )}
-      </ul>
-      <button onClick={this.addFunc.bind(this)}>Add Track</button>
-      */}
       {this.props.children}
     </div>
     );
@@ -35,11 +24,9 @@ class MainLayout extends Component {
 
 export default connect(
   state => ({
-    globalState: state.testArray
+
   }),
   dispatch => ({
-    onAddTrack: (trackName) => {
-      dispatch({ type: 'ADD_ARRAY', payload: trackName });
-    }
+
   })
 )(MainLayout);
