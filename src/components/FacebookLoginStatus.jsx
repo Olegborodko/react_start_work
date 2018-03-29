@@ -56,7 +56,7 @@ class FacebookLoginStatus extends Component {
           console.log(response.error)
         }else{
           this_.props.g_Users(response.data);
-          this_.props.g_compaignsRequest(response.data, 0);
+          this_.props.g_compaignsRequest(response.data, 0, 0);
         }
       });
 
@@ -85,8 +85,8 @@ dispatch => ({
   g_Users: (trackName) => {
     dispatch({ type: 'USERS_CHANGE', payload: trackName });
   },
-  g_compaignsRequest: (g_users, userId) => {
-    dispatch(g_campaignsRequest(g_users, userId));
+  g_compaignsRequest: (g_users, userIndex, campaignIndex) => {
+    dispatch(g_campaignsRequest(g_users, userIndex, campaignIndex));
   }
 })
 )(FacebookLoginStatus);
