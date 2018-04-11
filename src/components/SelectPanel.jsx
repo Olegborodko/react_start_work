@@ -37,7 +37,6 @@ class selectPanel extends Component {
 
   render() {
     const {g_users, g_campaigns, g_ads} = this.props;
-
     return (
     <div>
       <div>

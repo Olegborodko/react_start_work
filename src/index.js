@@ -7,14 +7,15 @@ import {
   Route,
   Link,
   Switch,
-  HashRouter
+  HashRouter,
+  BrowserRouter
 } from 'react-router-dom';
 
 import App from './routes/App.jsx';
 import Login from './routes/Login';
 import Dashboard from './routes/Dashboard.jsx';
 import Page404 from './routes/Page404';
-import Test from './routes/Test.jsx';
+import Facebook from './routes/Facebook.jsx';
 
 import MainLayout from './layouts/MainLayout';
 import Null from './layouts/Null';
@@ -43,18 +44,18 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
 );
 
 ReactDOM.render(
-  <Provider store={store}>
-    <HashRouter>
-      <Router>
-        <Switch>
-          <AppRoute exact path="/" layout={Null} component={Login} />
-          <AppRoute exact path="/dashboard" layout={MainLayout} component={Dashboard} />
-          <AppRoute exact path="/test" layout={MainLayout} component={Test} />
-          <AppRoute layout={Null} component={Page404} />
-        </Switch>
-      </Router>
-    </HashRouter>
-  </Provider>,
-  document.getElementById('root')
+<Provider store={store}>
+  <BrowserRouter>
+    <Router>
+    <Switch>
+      <Route exact path="/" layout={Null} component={Login} />
+      <Route exact path="/dashboard" layout={MainLayout} component={Dashboard} />
+      <Route exact path="/facebook" layout={MainLayout} component={Facebook} />
+      <Route layout={Null} component={Page404} />
+    </Switch>
+    </Router>
+  </BrowserRouter>
+</Provider>,
+document.getElementById('root')
 );
 registerServiceWorker();

@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import SelectPanel from '../components/SelectPanel';
+import { connect } from 'react-redux';
 
 class Dashboard extends Component {
+
   render() {
   //  const {campaignsGlobal, initialApi, usersGlobal} = this.props;
-
+    console.log(this.props.location.pathname);
     return (
     <div>
+      {/*<Logout/>*/}
+      <br/><br/>
       Dashboard
+
        <br/><br/>
         <SelectPanel/>
     </div>
@@ -15,4 +20,18 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default connect(
+state => ({
+  g_users: state.users,
+  // g_campaigns: state.campaigns,
+  // g_ads: state.ads
+}),
+dispatch => ({
+  // g_compaignsRequest: (g_users, userIndex, campaignIndex) => {
+  //   dispatch(g_campaignsRequest(g_users, userIndex, campaignIndex));
+  // },
+  // g_adsRequest: (g_campaigns, campaignIndex) => {
+  //   dispatch(g_adsRequest(g_campaigns, campaignIndex));
+  // }
+})
+)(Dashboard);

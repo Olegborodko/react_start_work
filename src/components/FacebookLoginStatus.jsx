@@ -48,8 +48,8 @@ class FacebookLoginStatus extends Component {
   }
 
   statusChangeCallback(response){
+    var this_=this;
     if (response['status']==="connected"){
-      var this_ = this;
 
       window.FB.api('/me/adaccounts?fields=name', 'get', {access_token: response.authResponse.accessToken}, (response) => {
         if (response.error) {
@@ -61,11 +61,14 @@ class FacebookLoginStatus extends Component {
       });
 
       if (window.location.pathname===this.props.linkToLogin){
-        window.location = this.props.linkToDashboard;
+        this_.props.history.push('/dashboard');
+
       }
     }else{
       if (window.location.pathname!==this.props.linkToLogin) {
         window.location = this.props.linkToLogin;
+        //this_.props.history.push(this_.props.linkToLogin);
+        //browserHistory.push(this_.props.linkToLogin);
       }
     }
   }
@@ -79,7 +82,7 @@ class FacebookLoginStatus extends Component {
 
 export default connect(
 state => ({
-
+  g_users: state.users,
 }),
 dispatch => ({
   g_Users: (trackName) => {
