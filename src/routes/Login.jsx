@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import Logout from '../components/Logout';
 var axios = require('axios');
 
 class Login extends Component {
@@ -22,8 +23,12 @@ class Login extends Component {
     })
     .then(function (response) {
       if (response){
-        console.log(response);
-        this_.props.history.push('/facebook');
+        if (response['data']){
+          //console.log(response['data']['token']);
+          this_.props.g_tokenChange(response['data']['token']);
+          this_.props.g_emailChange(response['data']['email']);
+          this_.props.history.push('/facebook');
+        }
       }
     })
     .catch(function (response) {
@@ -47,6 +52,8 @@ class Login extends Component {
     <Grid>
       <Row className="show-grid">
         <Col sm={12}>
+          <Logout/>
+
           <form onSubmit={this.handleSubmit}>
             <ul>
               <li className="logo">
@@ -87,11 +94,11 @@ state => ({
   g_ads: state.ads
 }),
 dispatch => ({
-  // g_compaignsRequest: (g_users, userIndex, campaignIndex) => {
-  //   dispatch(g_campaignsRequest(g_users, userIndex, campaignIndex));
-  // },
-  // g_adsRequest: (g_campaigns, campaignIndex) => {
-  //   dispatch(g_adsRequest(g_campaigns, campaignIndex));
-  // }
+  g_tokenChange: (token) => {
+    dispatch({ type: 'CURRENT_TOKEN_CHANGE', payload: token });
+  },
+  g_emailChange: (email) => {
+    dispatch({ type: 'CURRENT_EMAIL_CHANGE', payload: email });
+  },
 })
 )(Login);

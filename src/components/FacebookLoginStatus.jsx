@@ -61,8 +61,9 @@ class FacebookLoginStatus extends Component {
       });
 
       if (window.location.pathname===this.props.linkToLogin){
-        this_.props.history.push('/dashboard');
-
+        //console.log(this_.props.history.location.pathname);
+        this_.props.g_urlHistory(this_.props.history.location.pathname);
+        this_.props.history.push(this_.props.linkToDashboard);
       }
     }else{
       if (window.location.pathname!==this.props.linkToLogin) {
@@ -83,6 +84,7 @@ class FacebookLoginStatus extends Component {
 export default connect(
 state => ({
   g_users: state.users,
+
 }),
 dispatch => ({
   g_Users: (trackName) => {
@@ -90,6 +92,9 @@ dispatch => ({
   },
   g_compaignsRequest: (g_users, userIndex, campaignIndex) => {
     dispatch(g_campaignsRequest(g_users, userIndex, campaignIndex));
+  },
+  g_urlHistory: (url) => {
+    dispatch({ type: 'URL_HISTORY_ADD', payload: url });
   }
 })
 )(FacebookLoginStatus);

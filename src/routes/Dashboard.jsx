@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import SelectPanel from '../components/SelectPanel';
 import { connect } from 'react-redux';
+import Logout from '../components/Logout';
 
 class Dashboard extends Component {
+  componentDidMount(){
+    if (this.props.g_urlHistory.length===0){
+      window.location = '/';
+    }
+  }
 
   render() {
   //  const {campaignsGlobal, initialApi, usersGlobal} = this.props;
-    console.log(this.props.location.pathname);
     return (
     <div>
-      {/*<Logout/>*/}
+      <Logout/>
       <br/><br/>
       Dashboard
 
@@ -23,7 +28,7 @@ class Dashboard extends Component {
 export default connect(
 state => ({
   g_users: state.users,
-  // g_campaigns: state.campaigns,
+  g_urlHistory: state.urlHistory,
   // g_ads: state.ads
 }),
 dispatch => ({

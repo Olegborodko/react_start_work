@@ -21,14 +21,18 @@ import MainLayout from './layouts/MainLayout';
 import Null from './layouts/Null';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'; //-
 
 //============state part
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import reducer from './reducers';
+import reducers from './reducers';
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+const history = createHistory();
+const middleware = routerMiddleware(history);  //-
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk, middleware)));
 
 //temp
 //window.store = store;
@@ -45,16 +49,14 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
 
 ReactDOM.render(
 <Provider store={store}>
-  <BrowserRouter>
-    <Router>
+  <ConnectedRouter history={history}>
     <Switch>
       <Route exact path="/" layout={Null} component={Login} />
       <Route exact path="/dashboard" layout={MainLayout} component={Dashboard} />
       <Route exact path="/facebook" layout={MainLayout} component={Facebook} />
       <Route layout={Null} component={Page404} />
     </Switch>
-    </Router>
-  </BrowserRouter>
+  </ConnectedRouter>
 </Provider>,
 document.getElementById('root')
 );
