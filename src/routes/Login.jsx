@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import Logout from '../components/Logout';
 var axios = require('axios');
 
 class Login extends Component {
@@ -17,7 +16,7 @@ class Login extends Component {
   handleSubmit(event){
     event.preventDefault();
     var this_=this;
-    axios.post('https://localhost:3001/api/users/login', {
+    axios.post('https://'+process.env.HOST_RAILS+'/api/users/login', {
       email: this.refs.email_input.value,
       password: this.refs.password_input.value
     })
@@ -52,7 +51,6 @@ class Login extends Component {
     <Grid>
       <Row className="show-grid">
         <Col sm={12}>
-          <Logout/>
 
           <form onSubmit={this.handleSubmit}>
             <ul>
