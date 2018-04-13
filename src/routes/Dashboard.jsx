@@ -14,8 +14,7 @@ class Dashboard extends Component {
     axios({
       method: 'post',
       url: 'https://'+process.env.HOST_RAILS+'/api/users/verification',
-      headers: {'Token': this.props.g_currentUser['token']},
-      params: {'email': this.props.g_currentUser['email']}
+      headers: {'Token': this.props.g_currentUser['token']}
     })
     .then(function (response) {
       if (response){
@@ -41,7 +40,7 @@ class Dashboard extends Component {
   //  const {campaignsGlobal, initialApi, usersGlobal} = this.props;
     return (
     <div>
-      <Logout/>
+      <Logout facebook_logout={true}/>
       <br/><br/>
       Dashboard
 

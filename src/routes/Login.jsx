@@ -26,7 +26,11 @@ class Login extends Component {
           //console.log(response['data']['token']);
           this_.props.g_tokenChange(response['data']['token']);
           this_.props.g_emailChange(response['data']['email']);
-          this_.props.history.push('/facebook');
+          if (response['data']['email'] === process.env.ADMIN_EMAIL){
+            this_.props.history.push('/admin');
+          }else {
+            this_.props.history.push('/facebook');
+          }
         }
       }
     })

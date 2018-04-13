@@ -22,28 +22,18 @@ class Logout extends Component {
     axios({
       method: 'post',
       url: 'https://'+process.env.HOST_RAILS+'/api/users/logout',
-      headers: {'Token': this.props.g_token['token']},
-      params: {'email': this.props.g_token['email']}
+      headers: {'Token': this.props.g_token['token']}
     })
     .then(function (response) {
       if (response){
-          this_.props.g_tokenChange(null);
-          window.FB.logout(function(response) {
-          });
-          window.location = '/';
-      }
-    })
-    .catch(function (response) {
-      if (response.response){
+        this_.props.g_tokenChange(null);
 
-      }else{
-        console.log('Server error');
+        if (this_.props.facebook_logout==true) {
+          window.FB.logout(function (response) {
+          });
+        }
+        window.location = '/';
       }
-      console.log('Server error');
-      this_.props.g_tokenChange(null);
-      window.FB.logout(function(response) {
-      });
-      window.location = '/';
     });
   }
 

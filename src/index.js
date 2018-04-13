@@ -16,6 +16,7 @@ import Login from './routes/Login';
 import Dashboard from './routes/Dashboard.jsx';
 import Page404 from './routes/Page404';
 import Facebook from './routes/Facebook.jsx';
+import Admin from './routes/Admin';
 
 import MainLayout from './layouts/MainLayout';
 import Null from './layouts/Null';
@@ -54,6 +55,7 @@ ReactDOM.render(
       <Route exact path="/" layout={Null} component={Login} />
       <Route exact path="/dashboard" layout={MainLayout} component={Dashboard} />
       <Route exact path="/facebook" layout={MainLayout} component={Facebook} />
+      <Route exact path="/admin" layout={Null} component={Admin} />
       <Route layout={Null} component={Page404} />
     </Switch>
   </ConnectedRouter>
