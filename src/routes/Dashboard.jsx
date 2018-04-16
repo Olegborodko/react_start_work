@@ -8,40 +8,60 @@ const cookies = new Cookies();
 var axios = require('axios');
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.error = this.error.bind(this);
+    this.statusChangeCallback = this.statusChangeCallback.bind(this);
+  }
+
+  error(){
+    cookies.remove('market_user_co', { path: '/', secure: true });
+    window.location = '/';
+  }
+
+  statusChangeCallback(response){
+    var this_=this;
+    if (response['status']==="connected"){
+
+      window.FB.api('/me/adaccounts?fields=name', 'get', {access_token: response.authResponse.accessToken}, (response) => {
+        if (response.error) {
+          console.log(response.error)
+        }else{
+          this_.props.g_Users(response.data);
+          this_.props.g_compaignsRequest(response.data, 0, 0);
+        }
+      });
+    }
+  }
+
   componentDidMount(){
-    // if (this.props.g_urlHistory.length===0){
-    //   window.location = '/';
-    // }
-    var token_cookie = cookies.get('market_user_co')
+    var this_=this;
+    var response_params = {method: 'post',
+      url: 'https://'+process.env.HOST_RAILS+'/api/users/verification'};
+
+    var token_cookie = cookies.get('market_user_co');
     if (token_cookie){
-      this.props.g_tokenChange(token_cookie);
-      return
+      if (this_.props.g_urlHistory.length===0){
+        window.location = '/facebook';
+      }
+      response_params['headers'] = {'Token': token_cookie};
+    }else{
+      response_params['headers'] = {'Token': this_.props.g_currentUser['token']};
     }
 
-    var this_=this;
-    axios({
-      method: 'post',
-      url: 'https://'+process.env.HOST_RAILS+'/api/users/verification',
-      headers: {'Token': this.props.g_currentUser['token']}
-    })
-    .then(function (response) {
+    axios(response_params).then(function (response) {
       if (response){
         if (response['data']){
           this_.props.g_tokenChange(response['data']['token']);
+          cookies.set('market_user_co', response['data']['token'], { path: '/', secure: true });
+          return;
         }
       }
+      this_.error();
     })
     .catch(function (response) {
-      if (response.response){
-        this_.props.g_tokenChange(null);
-        window.location = '/';
-      }else{
-        console.log('Server error');
-      }
-      this_.props.g_tokenChange(null);
-      window.location = '/';
+      this_.error();
     });
-
   }
 
   render() {
@@ -62,7 +82,8 @@ class Dashboard extends Component {
 export default connect(
 state => ({
   g_users: state.users,
-  g_currentUser: state.currentUser
+  g_currentUser: state.currentUser,
+  g_urlHistory: state.urlHistory
   // g_ads: state.ads
 }),
 dispatch => ({

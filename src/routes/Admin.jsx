@@ -15,77 +15,46 @@ class Admin extends Component {
     };
 
     this.users_show = this.users_show.bind(this);
+    this.error = this.error.bind(this);
+  }
+
+  error(){
+    cookies.remove('market_admin_co', { path: '/', secure: true });
+    window.location = '/';
   }
 
   users_show(){
-    var this_=this;
-    axios({
-      method: 'post',
-      url: 'https://'+process.env.HOST_RAILS+'/api/admin/users',
-      headers: {'Token': this.props.g_currentUser['token']}
-    })
-    .then(function (response) {
-      if (response){
-        console.log(response);
-        // if (response['data']){
-        //   if (response['data']['email'] === process.env.ADMIN_EMAIL) {
-        //     this_.props.g_tokenChange(response['data']['token']);
-        //   }else{
-        //     this_.props.g_tokenChange(null);
-        //     window.location = '/';
-        //   }
-        // }
-      }
-    })
-    .catch(function (response) {
-      if (response.response){
-        this_.props.g_tokenChange(null);
-        window.location = '/';
-      }else{
-        console.log('Server error');
-      }
-      this_.props.g_tokenChange(null);
-      window.location = '/';
-    });
+
   }
 
   componentDidMount(){
+    var this_=this;
+    var response_params = {method: 'post',
+    url: 'https://'+process.env.HOST_RAILS+'/api/users/verification'};
 
-    var token_cookie = cookies.get('market_admin_co')
+    var token_cookie = cookies.get('market_admin_co');
     if (token_cookie){
-      this.props.g_tokenChange(token_cookie);
-      return
+      response_params['headers'] = {'Token': token_cookie};
+    }else{
+      response_params['headers'] = {'Token': this_.props.g_currentUser['token']};
     }
 
-    var this_=this;
-    axios({
-      method: 'post',
-      url: 'https://'+process.env.HOST_RAILS+'/api/users/verification',
-      headers: {'Token': this.props.g_currentUser['token']}
-    })
+    axios(response_params)
     .then(function (response) {
       if (response){
         if (response['data']){
           if (response['data']['email'] === process.env.ADMIN_EMAIL) {
             this_.props.g_tokenChange(response['data']['token']);
-          }else{
-            this_.props.g_tokenChange(null);
-            window.location = '/';
+            cookies.set('market_admin_co', response['data']['token'], { path: '/', secure: true });
+            return;
           }
         }
       }
+      this_.error();
     })
     .catch(function (response) {
-      if (response.response){
-        this_.props.g_tokenChange(null);
-        window.location = '/';
-      }else{
-        console.log('Server error');
-      }
-      this_.props.g_tokenChange(null);
-      window.location = '/';
+      this_.error();
     });
-
   }
 
   render() {
@@ -94,8 +63,6 @@ class Admin extends Component {
     <div>
       <Logout facebook_logout={false}/>
       <br/><br/>
-
-
     </div>
     );
   }
