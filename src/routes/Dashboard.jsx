@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import SelectPanel from '../components/SelectPanel';
 import { connect } from 'react-redux';
 import Logout from '../components/Logout';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 var axios = require('axios');
 
 class Dashboard extends Component {
@@ -9,6 +12,11 @@ class Dashboard extends Component {
     // if (this.props.g_urlHistory.length===0){
     //   window.location = '/';
     // }
+    var token_cookie = cookies.get('market_user_co')
+    if (token_cookie){
+      this.props.g_tokenChange(token_cookie);
+      return
+    }
 
     var this_=this;
     axios({

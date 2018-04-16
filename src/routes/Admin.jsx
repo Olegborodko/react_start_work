@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Logout from '../components/Logout';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 var axios = require('axios');
 
 class Admin extends Component {
   constructor(props) {
     super(props);
     //const data = props.data;
-    // this.state = {
-    //   selectValue: ''
-    // };
+    this.state = {
+      users: []
+    };
 
     this.users_show = this.users_show.bind(this);
   }
@@ -18,19 +21,20 @@ class Admin extends Component {
     var this_=this;
     axios({
       method: 'post',
-      url: 'https://'+process.env.HOST_RAILS+'/api/users/verification',
+      url: 'https://'+process.env.HOST_RAILS+'/api/admin/users',
       headers: {'Token': this.props.g_currentUser['token']}
     })
     .then(function (response) {
       if (response){
-        if (response['data']){
-          if (response['data']['email'] === process.env.ADMIN_EMAIL) {
-            this_.props.g_tokenChange(response['data']['token']);
-          }else{
-            this_.props.g_tokenChange(null);
-            window.location = '/';
-          }
-        }
+        console.log(response);
+        // if (response['data']){
+        //   if (response['data']['email'] === process.env.ADMIN_EMAIL) {
+        //     this_.props.g_tokenChange(response['data']['token']);
+        //   }else{
+        //     this_.props.g_tokenChange(null);
+        //     window.location = '/';
+        //   }
+        // }
       }
     })
     .catch(function (response) {
@@ -46,6 +50,12 @@ class Admin extends Component {
   }
 
   componentDidMount(){
+
+    var token_cookie = cookies.get('market_admin_co')
+    if (token_cookie){
+      this.props.g_tokenChange(token_cookie);
+      return
+    }
 
     var this_=this;
     axios({

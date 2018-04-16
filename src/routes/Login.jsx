@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 var axios = require('axios');
 
 class Login extends Component {
@@ -11,6 +14,15 @@ class Login extends Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount(){
+    if (cookies.get('market_admin_co')){
+      this.props.history.push('/admin');
+    }
+    if (cookies.get('market_user_co')){
+      this.props.history.push('/facebook');
+    }
   }
 
   handleSubmit(event){
@@ -27,8 +39,10 @@ class Login extends Component {
           this_.props.g_tokenChange(response['data']['token']);
           this_.props.g_emailChange(response['data']['email']);
           if (response['data']['email'] === process.env.ADMIN_EMAIL){
+            cookies.set('market_admin_co', response['data']['token'], { path: '/', secure: true });
             this_.props.history.push('/admin');
           }else {
+            cookies.set('market_user_co', response['data']['token'], { path: '/', secure: true });
             this_.props.history.push('/facebook');
           }
         }
