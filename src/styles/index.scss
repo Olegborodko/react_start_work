@@ -1,5 +1,64 @@
 @import url(reset.scss);
 @import url(global.scss);
-body{
 
+.log_out{
+  display: inline;
+  cursor:pointer;
+  text-decoration: underline;
+}
+
+.delete{
+  display: inline-block;
+  text-decoration: underline;
+  cursor:pointer;
+}
+
+.admin_table{
+  width:100%;
+}
+
+.admin_table td{
+  width:33%;
+  border-bottom: 1px solid;
+  padding: 10px;
+}
+
+.admin_table td.title{
+  font-weight: 700;
+}
+
+.form_user_add ul li{
+  display: inline-block;
+  margin-right:10px;
+}
+
+.form_user_add input{
+  padding: 4px 10px;
+}
+
+.error{
+  color:red;
+  margin-top:10px;
+}
+
+.form_login input{
+  padding: 4px 10px;
+}
+
+.form_login li{
+  margin-bottom:10px;
+}
+
+.fb-login-button{
+  margin-top:20px;
+}
+
+.dashboard_select select{
+  padding: 4px 10px;
+}
+
+.dashboard_select{
+  display:inline-block;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }

@@ -45,7 +45,7 @@ class Logout extends Component {
     // const {data} = this.props;
     // const {selectValue} = this.state;
     return (
-    <div onClick={this.logoutF}>
+    <div onClick={this.logoutF} className="log_out">
       Log out
     </div>
     );

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Logout from '../components/Logout';
 import UserAdd from '../components/UserAdd';
 import Cookies from 'universal-cookie';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 const cookies = new Cookies();
 var axios = require('axios');
@@ -61,11 +62,11 @@ class Admin extends Component {
   }
 
   user_add(user){
-     let users = this.state.users;
-     users['users'].push(user);
-     this.setState({
-       users: users
-     });
+    let users = this.state.users;
+    users['users'].push(user);
+    this.setState({
+      users: users
+    });
   }
 
   users_show(token){
@@ -78,7 +79,7 @@ class Admin extends Component {
       if (response){
         if (response['data']){
           //if (response['data'].isArray) {
-            this_.setState({users: response['data']});
+          this_.setState({users: response['data']});
           //}
           return;
         }
@@ -93,7 +94,7 @@ class Admin extends Component {
   componentDidMount(){
     var this_=this;
     var response_params = {method: 'post',
-    url: 'https://'+process.env.HOST_RAILS+'/api/users/verification'};
+      url: 'https://'+process.env.HOST_RAILS+'/api/users/verification'};
 
     var token_cookie = cookies.get('market_admin_co');
     if (token_cookie){
@@ -125,17 +126,46 @@ class Admin extends Component {
     const {users} = this.state;
     return (
     <div>
-      <Logout facebook_logout={false}/>
-      <br/><br/>
-      <UserAdd user_add={this.user_add}/>
-      <br/><br/>
-      {users['users'] && users['users'].map((key, idx) => {
-        return (
-        <div key={idx}>
-          {key['email']}  {key['name']}  <div onClick={() => this.user_delete(key['email'], idx)}>Delete</div>
-        </div>
-        );
-      })}
+      <Grid>
+        <Row className="show-grid">
+          <Col sm={12}>
+            <Logout facebook_logout={false}/>
+            <br/><br/>
+            <UserAdd user_add={this.user_add}/>
+            <br/><br/>
+            <table className="admin_table">
+              <tbody>
+              <tr>
+                <td className="title">
+                  Email
+                </td>
+                <td className="title">
+                  Name
+                </td>
+                <td>
+
+                </td>
+              </tr>
+              {users['users'] && users['users'].map((key, idx) => {
+                return (
+                <tr key={idx}>
+                  <td>
+                    {key['email']}
+                  </td>
+                  <td>
+                    {key['name']}
+                  </td>
+                  <td>
+                    <div className="delete" onClick={() => this.user_delete(key['email'], idx)}>Delete</div>
+                  </td>
+                </tr>
+                );
+              })}
+              </tbody>
+            </table>
+          </Col>
+        </Row>
+      </Grid>
     </div>
     );
   }

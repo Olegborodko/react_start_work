@@ -23,7 +23,7 @@ class Select extends Component {
     const {selectValue} = this.state;
 
     return (
-    <div>
+    <div className="dashboard_select">
       {data.length > 0 &&
       <select onChange={this.selectChange} value={selectValue}>
         {data.map((key, idx) => {

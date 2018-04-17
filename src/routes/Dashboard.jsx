@@ -3,6 +3,7 @@ import SelectPanel from '../components/SelectPanel';
 import { connect } from 'react-redux';
 import Logout from '../components/Logout';
 import Cookies from 'universal-cookie';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 const cookies = new Cookies();
 var axios = require('axios');
@@ -68,12 +69,18 @@ class Dashboard extends Component {
   //  const {campaignsGlobal, initialApi, usersGlobal} = this.props;
     return (
     <div>
+      <Grid>
+        <Row className="show-grid">
+          <Col sm={12}>
       <Logout facebook_logout={true}/>
       <br/><br/>
       Dashboard
 
        <br/><br/>
         <SelectPanel/>
+          </Col>
+        </Row>
+      </Grid>
     </div>
     );
   }

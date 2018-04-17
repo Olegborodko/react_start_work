@@ -44,14 +44,10 @@ class selectPanel extends Component {
           data={ g_users }
           changeUser = { this.changeUser }
         />
-        <br/>
-        <br/>
         <Select
           data={ g_campaigns }
           changeUser = { this.changeCampaign }
         />
-        <br/>
-        <br/>
         <Select
           data={ g_ads }
           changeUser = { this.changeAd }

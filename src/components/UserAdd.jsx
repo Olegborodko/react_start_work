@@ -62,7 +62,7 @@ class UserAdd extends Component {
 
     return (
     <div>
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="form_user_add">
         <ul>
           <li>
             <input
@@ -90,7 +90,7 @@ class UserAdd extends Component {
           </li>
         </ul>
       </form>
-      {error}
+      <div className="error">{error}</div>
     </div>
     );
   }

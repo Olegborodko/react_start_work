@@ -70,7 +70,7 @@ class Login extends Component {
       <Row className="show-grid">
         <Col sm={12}>
 
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="form_login">
             <ul>
               <li className="logo">
                 Logo
@@ -95,7 +95,7 @@ class Login extends Component {
             </ul>
           </form>
 
-          <div>{error}</div>
+          <div className="error">{error}</div>
         </Col>
       </Row>
     </Grid>
