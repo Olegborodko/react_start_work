@@ -156,7 +156,9 @@ class Admin extends Component {
                     {key['name']}
                   </td>
                   <td>
-                    <div className="delete" onClick={() => this.user_delete(key['email'], idx)}>Delete</div>
+                    { key['email']!==process.env.ADMIN_EMAIL &&
+                      <div className="delete" onClick={() => this.user_delete(key['email'], idx)}>Delete</div>
+                    }
                   </td>
                 </tr>
                 );
