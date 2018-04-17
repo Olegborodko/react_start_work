@@ -11,7 +11,6 @@ import {
   BrowserRouter
 } from 'react-router-dom';
 
-import App from './routes/App.jsx';
 import Login from './routes/Login';
 import Dashboard from './routes/Dashboard.jsx';
 import Page404 from './routes/Page404';

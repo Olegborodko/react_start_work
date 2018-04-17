@@ -6,6 +6,7 @@ import currentUser from './currentUser.js';
 import campaigns from './campaigns.js';
 import ads from './ads.js';
 import urlHistory from './urlHistory.js';
+import adverts from './adverts';
 
 export default combineReducers({
   routing: routerReducer,
@@ -13,5 +14,6 @@ export default combineReducers({
   currentUser,
   campaigns,
   ads,
-  urlHistory
+  urlHistory,
+  adverts
 });
