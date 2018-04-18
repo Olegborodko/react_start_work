@@ -26,6 +26,7 @@ class selectPanel extends Component {
                                   userIndex,
                                   this.state.campaignIndex,
                                   this.state.adIndex);
+    this.props.g_userChange(userIndex);
     this.setState({
       userId: userIndex
     });
@@ -35,6 +36,7 @@ class selectPanel extends Component {
     this.props.g_adsRequest(this.props.g_campaigns,
                             campaignIndex,
                             this.state.adIndex);
+    this.props.g_campaignChange(campaignIndex);
     this.setState({
       campaignIndex: campaignIndex
     });
@@ -42,13 +44,17 @@ class selectPanel extends Component {
 
   changeAd(adIndex){
     this.props.g_advertRequest(this.props.g_ads, adIndex);
+    this.props.g_adsChange(adIndex);
     this.setState({
       adIndex: adIndex
     });
   }
 
   changeAdvert(advertIndex){
-
+    this.props.g_adChange(advertIndex);
+    this.setState({
+      advertIndex: advertIndex
+    });
   }
 
   render() {
@@ -94,6 +100,18 @@ dispatch => ({
   },
   g_advertRequest: (g_adverts, adIndex) => {
     dispatch(g_advertRequest(g_adverts, adIndex));
+  },
+  g_userChange: (index) => {
+    dispatch({ type: 'CURRENT_USER_CHANGE', payload: index });
+  },
+  g_campaignChange: (index) => {
+    dispatch({ type: 'CURRENT_CAMPAIGN_CHANGE', payload: index });
+  },
+  g_adsChange: (index) => {
+    dispatch({ type: 'CURRENT_ADS_CHANGE', payload: index });
+  },
+  g_adChange: (index) => {
+    dispatch({ type: 'CURRENT_AD_CHANGE', payload: index });
   }
 })
 )(selectPanel);

@@ -3,7 +3,8 @@ import { g_adsRequest } from './ads';
 export const g_campaignsRequest = (g_users, userIndex, campaignIndex, adIndex) => dispatch => {
   var ad_account_id = g_users[userIndex].id;
 
-  window.FB.api('/'+ad_account_id+'/campaigns?fields=name,objective', 'get', {}, (response) => {
+  //fields=name,objective
+  window.FB.api('/'+ad_account_id+'/campaigns?fields=name', 'get', {}, (response) => {
     if (response.error) {
       console.log(response.error)
     }else{

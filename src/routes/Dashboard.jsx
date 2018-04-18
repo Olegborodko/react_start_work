@@ -5,6 +5,8 @@ import Logout from '../components/Logout';
 import Cookies from 'universal-cookie';
 import { Grid, Row, Col } from 'react-bootstrap';
 import FacebookLoginStatus from '../components/FacebookLoginStatus.jsx';
+import Chart from '../components/Chart';
+import SelectButtons from '../components/SelectButtons';
 
 const cookies = new Cookies();
 var axios = require('axios');
@@ -48,7 +50,7 @@ class Dashboard extends Component {
   }
 
   render() {
-  //  const {campaignsGlobal, initialApi, usersGlobal} = this.props;
+    //  const {campaignsGlobal, initialApi, usersGlobal} = this.props;
     return (
     <div>
       <FacebookLoginStatus
@@ -60,12 +62,15 @@ class Dashboard extends Component {
       <Grid>
         <Row className="show-grid">
           <Col sm={12}>
-      <Logout facebook_logout={true}/>
-      <br/><br/>
-      Dashboard
+            <Logout facebook_logout={true}/>
+            <br/><br/>
+            Dashboard
 
-       <br/><br/>
-        <SelectPanel/>
+            <br/><br/>
+            <SelectPanel/>
+            <SelectButtons/>
+            <br/>
+            <Chart/>
           </Col>
         </Row>
       </Grid>

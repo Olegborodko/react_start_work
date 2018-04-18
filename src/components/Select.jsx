@@ -25,6 +25,7 @@ class Select extends Component {
     return (
     <div className="dashboard_select">
       {data.length > 0 &&
+      <div className="item">
       <select onChange={this.selectChange} value={selectValue}>
         {data.map((key, idx) => {
           return (
@@ -34,6 +35,8 @@ class Select extends Component {
           );
         })}
       </select>
+        <div className="current_statistic"></div>
+      </div>
       }
     </div>
     );

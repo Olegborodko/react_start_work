@@ -7,7 +7,8 @@ export const g_adsRequest = (g_campaigns, campaignIndex, adIndex) => dispatch =>
   }else {
     var campaign_id = g_campaigns[campaignIndex].id;
 
-    window.FB.api('/' + campaign_id + '/adsets?fields=name,start_time,end_time,daily_budget,lifetime_budget', 'get', {}, (response) => {
+    //fields=name,start_time,end_time,daily_budget,lifetime_budget
+    window.FB.api('/' + campaign_id + '/adsets?fields=name', 'get', {}, (response) => {
       if (response.error) {
         console.log(response.error);
       } else {
