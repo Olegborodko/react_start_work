@@ -87,3 +87,19 @@
 .chart canvas{
   padding: 10px;
 }
+
+/* --- */
+
+.bigTopPanel{
+  width:100%;
+  border-top: 1px dotted darkgray;
+  border-left: 1px dotted darkgray;
+  border-right: 1px dotted darkgray;
+  text-align:center;
+  padding:20px 10px;
+}
+
+.bigTopPanel li{
+  width:25%;
+  display:inline-block;
+}

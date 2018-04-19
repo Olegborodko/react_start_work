@@ -7,6 +7,8 @@ import campaigns from './campaigns.js';
 import ads from './ads.js';
 import urlHistory from './urlHistory.js';
 import adverts from './adverts';
+import Statistics from './Statistics';
+import chart from './chart';
 
 export default combineReducers({
   routing: routerReducer,
@@ -15,5 +17,7 @@ export default combineReducers({
   campaigns,
   ads,
   urlHistory,
-  adverts
+  adverts,
+  Statistics,
+  chart
 });

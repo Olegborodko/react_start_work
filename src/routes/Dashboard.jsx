@@ -7,6 +7,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import FacebookLoginStatus from '../components/FacebookLoginStatus.jsx';
 import Chart from '../components/Chart';
 import SelectButtons from '../components/SelectButtons';
+import StatisticPanelBigTop from '../components/StatisticPanelBigTop';
 
 const cookies = new Cookies();
 var axios = require('axios');
@@ -70,6 +71,7 @@ class Dashboard extends Component {
             <SelectPanel/>
             <SelectButtons/>
             <br/>
+            <StatisticPanelBigTop/>
             <Chart/>
           </Col>
         </Row>
