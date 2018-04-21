@@ -20,25 +20,26 @@ class StatisticPanelBigTop extends Component {
   }
 
   render() {
-    const {g_spend, g_impressions, g_clicks, g_actions} = this.props;
-    var actionsSum = 0;
-    if (g_actions.length>0){
-      g_actions.map((key, idx) => {
-        actionsSum += parseInt(key.value);
+    const {g_statistic} = this.props;
+    // var actionsSum = 0;
+    if (g_statistic.length>0){
+      g_statistic.map((key, idx) => {
+        //actionsSum += parseInt(key.value);
+        console.log(key);
       })
     }
     return (
     <div>
       <ul className="bigTopPanel">
-        <li>{g_spend} <br/> COST</li>
-        <li>{g_impressions} <br/> IMPRESSIONS</li>
-        <li>{g_clicks} <br/> CLICKS</li>
-        {actionsSum === 0 &&
+        <li>{} <br/> COST</li>
+        <li>{} <br/> IMPRESSIONS</li>
+        <li>{} <br/> CLICKS</li>
+        {/* actionsSum === 0 &&
           <li><br/> ACTIONS</li>
-        }
-        {actionsSum !== 0 &&
+        */}
+        {/*actionsSum !== 0 &&
           <li>{actionsSum} <br/> ACTIONS</li>
-        }
+        */}
       </ul>
     </div>
     );
@@ -47,10 +48,7 @@ class StatisticPanelBigTop extends Component {
 
 export default connect(
 state => ({
-  g_spend: state.Statistics.spend,
-  g_impressions: state.Statistics.impressions,
-  g_clicks: state.Statistics.clicks,
-  g_actions: state.Statistics.actions
+  g_statistic: state.Statistics
 }),
 dispatch => ({
   // g_tokenChange: (token) => {

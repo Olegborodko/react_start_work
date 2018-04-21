@@ -85,7 +85,6 @@ export default connect(
 state => ({
   g_users: state.users,
   g_currentUser: state.currentUser
-  // g_ads: state.ads
 }),
 dispatch => ({
   g_tokenChange: (token) => {

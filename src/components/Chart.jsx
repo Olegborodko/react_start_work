@@ -21,30 +21,37 @@ class Chart extends Component {
   }
 
   render() {
-    // const {data} = this.props;
+    const {g_chartDays} = this.props;
     // const {selectValue} = this.state;
     var datasets_now = [];
-    datasets_now.push({  //min-max line
-      data:[0,10,20,30,40,50,60,70,80,90,100, 100],
-      fill: false,
-      showLine: false,
-      pointRadius: 0
+    datasets_now.push({
+      label: "My First dataset",
+      fillColor: "rgba(220,220,220,0.2)",
+      strokeColor: "rgba(220,220,220,1)",
+      pointColor: "rgba(220,220,220,1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(220,220,220,1)",
+      data:[0,10,20,30,40,50,60,70,80,90,100, 100]
     });
 
     var chartData = {
-      label: 'test',
-      fill: false,
-      showLine: true,
-      labels: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
-      datasets: datasets_now
+      labels: g_chartDays,
+      datasets: datasets_now,
     };
+
     var chartOptions = {
+      //label: 'test',
+      //type: 'line',
+      //fill: false,
+      //showLine: false,
       responsive: true,
-      legend: false
+      //legend: false,
     };
     return (
     <div className="chart">
-      <LineChart data={chartData} options={chartOptions}/>
+      {console.log(g_chartDays)}
+      <LineChart data={chartData} options={chartOptions} redraw/>
     </div>
     );
   }
@@ -53,6 +60,7 @@ class Chart extends Component {
 export default connect(
 state => ({
   // g_token: state.currentUser
+  g_chartDays: state.chart.days
 }),
 dispatch => ({
   // g_tokenChange: (token) => {
