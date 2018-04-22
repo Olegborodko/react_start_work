@@ -1,6 +1,8 @@
 //import { g_advertRequest } from './advert';
 import {dateStep} from '../functions/dateStep';
 import dateLast30days from '../functions/dateLast30days';
+import dateFormat from '../functions/dateFormat';
+import statisticsPart from './statisticsPart.jsx';
 
 export const g_Statistics = (g_set, index) => dispatch => {
   if (g_set.length===0){
@@ -20,8 +22,16 @@ export const g_Statistics = (g_set, index) => dispatch => {
         } else {
           if (response) {
             if (response.data) {
-              console.log(response.data);
               dispatch({type: 'STATISTICS_CHANGE', payload: response.data});
+
+              let date_period = dateStep(date_step.start, date_step.end);
+              dispatch({type: 'CHART_DAYS', payload: date_period});
+
+              //console.log(dateFormat(date_step.end));
+              console.log(response.data);
+
+              statisticsPart(response.data, dispatch, date_period);
+
               return;
             }
           }

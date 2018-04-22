@@ -21,22 +21,54 @@ class Chart extends Component {
   }
 
   render() {
-    const {g_chartDays} = this.props;
+    const {g_chart} = this.props;
     // const {selectValue} = this.state;
     var datasets_now = [];
-    datasets_now.push({
-      label: "My First dataset",
+    datasets_now.push(
+    {
+      label: "Cost",
       fillColor: "rgba(220,220,220,0.2)",
       strokeColor: "rgba(220,220,220,1)",
       pointColor: "rgba(220,220,220,1)",
       pointStrokeColor: "#fff",
       pointHighlightFill: "#fff",
       pointHighlightStroke: "rgba(220,220,220,1)",
-      data:[0,10,20,30,40,50,60,70,80,90,100, 100]
-    });
+      data: g_chart.spends_array
+    },
+    {
+      label: "Clicks",
+      fillColor: "rgba(220,220,220,0.2)",
+      strokeColor: "rgba(220,220,220,1)",
+      pointColor: "rgba(220,220,220,1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(220,220,220,1)",
+      data: g_chart.clicks_array
+    },
+    {
+      label: "Impressions",
+      fillColor: "rgba(220,220,220,0.2)",
+      strokeColor: "rgba(220,220,220,1)",
+      pointColor: "rgba(220,220,220,1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(220,220,220,1)",
+      data: g_chart.impressions_array
+    },
+    {
+      label: "Actions",
+      fillColor: "rgba(220,220,220,0.2)",
+      strokeColor: "rgba(220,220,220,1)",
+      pointColor: "rgba(220,220,220,1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(220,220,220,1)",
+      data: g_chart.actions_array
+    }
+    );
 
     var chartData = {
-      labels: g_chartDays,
+      labels: g_chart.days,
       datasets: datasets_now,
     };
 
@@ -50,7 +82,6 @@ class Chart extends Component {
     };
     return (
     <div className="chart">
-      {console.log(g_chartDays)}
       <LineChart data={chartData} options={chartOptions} redraw/>
     </div>
     );
@@ -59,8 +90,7 @@ class Chart extends Component {
 
 export default connect(
 state => ({
-  // g_token: state.currentUser
-  g_chartDays: state.chart.days
+  g_chart: state.chart
 }),
 dispatch => ({
   // g_tokenChange: (token) => {
