@@ -4,7 +4,8 @@ const initialState = {
   ads: 0,
   ad: 0,
   token: '',
-  email: ''
+  email: '',
+  preloaderWidth: 0
 };
 
 export default function ssss(state=initialState, action){
@@ -42,6 +43,18 @@ export default function ssss(state=initialState, action){
     return {
       ...state,
       ad: action.payload
+    }
+  }
+  if (action.type === 'PRELOADER_TRUE') {
+    return {
+      ...state,
+      preloaderWidth: 8
+    }
+  }
+  if (action.type === 'PRELOADER_FALSE') {
+    return {
+      ...state,
+      preloaderWidth: 0
     }
   }
 

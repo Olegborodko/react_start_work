@@ -31,7 +31,7 @@ class StatisticPanelBigTop extends Component {
     return (
     <div>
       <ul className="bigTopPanel">
-        <li>{g_chart.spends} <br/> COST</li>
+        <li>{(g_chart.spends).toFixed(2)} <br/> COST</li>
         <li>{g_chart.impressions} <br/> IMPRESSIONS</li>
         <li>{g_chart.clicks} <br/> CLICKS</li>
         <li>{g_chart.actions} <br/> ACTIONS</li>

@@ -31,12 +31,11 @@ export const g_Statistics = (g_set, index) => dispatch => {
               console.log(response.data);
 
               statisticsPart(response.data, dispatch, date_period);
-
-              return;
             }
           }
-          dispatch({type: 'STATISTICS_CHANGE', payload: []});
+
         }
+        dispatch({ type: 'PRELOADER_FALSE' });
       });
 
     }

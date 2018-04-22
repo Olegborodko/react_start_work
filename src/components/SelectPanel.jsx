@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { g_campaignsRequest } from '../actions/campaigns';
 import { g_adsRequest } from '../actions/ads';
 import { g_advertRequest } from '../actions/advert';
+import PreloaderIcon from 'react-preloader-icon';
+import Oval from 'react-preloader-icon/loaders/Oval';
 
 class selectPanel extends Component {
   constructor(props) {
@@ -58,7 +60,7 @@ class selectPanel extends Component {
   }
 
   render() {
-    const {g_users, g_campaigns, g_ads, g_adverts} = this.props;
+    const {g_users, g_campaigns, g_ads, g_adverts, g_preloaderWidth} = this.props;
     return (
     <div>
       <div>
@@ -78,6 +80,13 @@ class selectPanel extends Component {
         data={ g_adverts }
         changeUser = { this.changeAdvert }
         />
+        <PreloaderIcon
+        loader={Oval}
+        size={32}
+        strokeWidth={g_preloaderWidth} // min: 1, max: 50
+        strokeColor="#F0AD4E"
+        duration={800}
+        />
       </div>
     </div>
     );
@@ -89,7 +98,8 @@ state => ({
   g_users: state.users,
   g_campaigns: state.campaigns,
   g_ads: state.ads,
-  g_adverts: state.adverts
+  g_adverts: state.adverts,
+  g_preloaderWidth: state.currentUser.preloaderWidth
 }),
 dispatch => ({
   g_compaignsRequest: (g_users, userIndex, campaignIndex, adIndex) => {

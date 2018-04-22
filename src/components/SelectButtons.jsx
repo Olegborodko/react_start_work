@@ -19,14 +19,17 @@ class SelectButtons extends Component {
   }
 
   company_Statistics(){
+    this.props.g_PreloaderTrue();
     this.props.g_Statistics(this.props.g_campaigns, this.props.g_campaignIndex);
   }
 
   ads_Statistics(){
+    this.props.g_PreloaderTrue();
     this.props.g_Statistics(this.props.g_ads, this.props.g_adsIndex);
   }
 
   advertise_Statistics(){
+    this.props.g_PreloaderTrue();
     this.props.g_Statistics(this.props.g_ad, this.props.g_adIndex);
   }
 
@@ -62,5 +65,8 @@ dispatch => ({
   g_Statistics: (g_set, index) => {
     dispatch(g_Statistics(g_set, index));
   },
+  g_PreloaderTrue: () => {
+    dispatch({ type: 'PRELOADER_TRUE' });
+  }
 })
 )(SelectButtons);
