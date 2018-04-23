@@ -41,7 +41,7 @@ export const statisticsPart =  function(data, dispatch, date_period){
       date_start = key.date_start;
 
       actions_template = 0;
-      if (key.actions.length>0){
+      if (key.actions && key.actions.length>0){
         key.actions.map((key, idx) => {
           actions_template += parseInt(key.value);
         });

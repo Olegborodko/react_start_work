@@ -27,16 +27,18 @@ class Chart extends Component {
     datasets_now.push(
     {
       label: "Cost",
+      yAxisID: 'Cost',
       fillColor: "rgba(220,220,220,0.2)",
       strokeColor: "rgba(220,220,220,1)",
       pointColor: "rgba(220,220,220,1)",
       pointStrokeColor: "#fff",
       pointHighlightFill: "#fff",
       pointHighlightStroke: "rgba(220,220,220,1)",
-      data: g_chart.spends_array
+      data: g_chart.spends_array,
     },
     {
       label: "Clicks",
+      yAxisID: 'Clicks',
       fillColor: "rgba(220,220,220,0.2)",
       strokeColor: "rgba(220,220,220,1)",
       pointColor: "rgba(220,220,220,1)",
@@ -47,6 +49,7 @@ class Chart extends Component {
     },
     {
       label: "Impressions",
+      yAxisID: 'Impressions',
       fillColor: "rgba(220,220,220,0.2)",
       strokeColor: "rgba(220,220,220,1)",
       pointColor: "rgba(220,220,220,1)",
@@ -57,6 +60,7 @@ class Chart extends Component {
     },
     {
       label: "Actions",
+      yAxisID: 'Actions',
       fillColor: "rgba(220,220,220,0.2)",
       strokeColor: "rgba(220,220,220,1)",
       pointColor: "rgba(220,220,220,1)",
@@ -64,7 +68,7 @@ class Chart extends Component {
       pointHighlightFill: "#fff",
       pointHighlightStroke: "rgba(220,220,220,1)",
       data: g_chart.actions_array
-    }
+    },
     );
 
     var chartData = {
@@ -79,6 +83,51 @@ class Chart extends Component {
       //showLine: false,
       responsive: true,
       //legend: false,
+      //options.scales.xAxes[0].gridLines.display = false;
+
+      //scaleOverride : true,
+      //scaleSteps : 10,
+      //scaleStepWidth : 50,
+      //scaleStartValue : 0
+      options : {
+        scales : {
+          xAxes : [ {
+            gridLines : {
+              display : false
+            }
+          } ]
+        }
+      },
+
+      // options: {
+      //   scales: {
+      //     yAxes: [{
+      //       id: 'Cost',
+      //       type: 'linear',
+      //       position: 'left',
+      //     }, {
+      //       id: 'Clicks',
+      //       type: 'linear',
+      //       position: 'left',
+      //       ticks: {
+      //         max: 1,
+      //         min: 0,
+      //         stepWidth: 2
+      //       }
+      //     },
+      //       {
+      //         id: 'Impressions',
+      //         type: 'linear',
+      //         position: 'left',
+      //       },
+      //       {
+      //         id: 'Actions',
+      //         type: 'linear',
+      //         position: 'left',
+      //       }]
+      //   }
+      // }
+
     };
     return (
     <div className="chart">
