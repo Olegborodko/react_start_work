@@ -12,6 +12,9 @@ class FacebookLoginStatus extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      error: ''
+    };
 
     this.statusChangeCallback = this.statusChangeCallback.bind(this);
   }
@@ -49,6 +52,7 @@ class FacebookLoginStatus extends Component {
 
   statusChangeCallback(response){
     var this_=this;
+    console.log(response);
     if (response['status']==="connected"){
 
       window.FB.api('/me/adaccounts?fields=name', 'get', {access_token: response.authResponse.accessToken}, (response) => {
@@ -60,23 +64,35 @@ class FacebookLoginStatus extends Component {
         }
       });
 
-      if (window.location.pathname===this.props.linkToLogin){
+      if (window.location.pathname===this_.props.linkToLogin){
         //console.log(this_.props.history.location.pathname);
         this_.props.g_urlHistory(this_.props.history.location.pathname);
         this_.props.history.push(this_.props.linkToDashboard);
       }
     }else{
-      if (window.location.pathname!==this.props.linkToLogin) {
+      if (window.location.pathname!==this_.props.linkToLogin) {
         window.location = this.props.linkToLogin;
         //this_.props.history.push(this_.props.linkToLogin);
         //browserHistory.push(this_.props.linkToLogin);
+      }
+
+      console.log(response.authResponse===null);
+      if (response.authResponse===null){
+        this_.setState({
+          error: 'Please Log out and then Log in again'
+        });
+      }else{
+        this_.setState({
+          error: ''
+        });
       }
     }
   }
 
   render() {
+    const {error} = this.state;
     return (
-    <div></div>
+    <div>{error}</div>
     );
   }
 }
