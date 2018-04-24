@@ -63,7 +63,7 @@ class selectPanel extends Component {
     const {g_users, g_campaigns, g_ads, g_adverts, g_preloaderWidth} = this.props;
     return (
     <div>
-      <div>
+      <div className="selects_top">
         <Select
           data={ g_users }
           changeUser = { this.changeUser }

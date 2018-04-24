@@ -7,7 +7,9 @@ const initialState = {
   clicks_array: [],
   impressions_array: [],
   spends_array: [],
-  actions_array: []
+  actions_array: [],
+  cost_per_action_array: [],
+  average_action_price: 0
 };
 
 export default function ssss(state=initialState, action){
@@ -71,6 +73,20 @@ export default function ssss(state=initialState, action){
     return {
       ...state,
       actions_array: action.payload
+    }
+  }
+
+  if (action.type === 'COST_PER_ACTION_ARRAY') {
+    return {
+      ...state,
+      cost_per_action_array: action.payload
+    }
+  }
+
+  if (action.type === 'AVERAGE_ACTION_PRICE') {
+    return {
+      ...state,
+      average_action_price: action.payload
     }
   }
 

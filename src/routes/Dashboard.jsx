@@ -8,6 +8,7 @@ import FacebookLoginStatus from '../components/FacebookLoginStatus.jsx';
 import Chart from '../components/Chart';
 import SelectButtons from '../components/SelectButtons';
 import StatisticPanelBigTop from '../components/StatisticPanelBigTop';
+import ChatSmall from '../components/ChartSmall';
 
 const cookies = new Cookies();
 var axios = require('axios');
@@ -66,13 +67,27 @@ class Dashboard extends Component {
             <Logout facebook_logout={true}/>
             <br/><br/>
             Dashboard
-
+          </Col>
+        </Row>
+      </Grid>
+      <Grid fluid={true}>
+        <Row className="show-grid">
+          <Col sm={12}>
             <br/><br/>
             <SelectPanel/>
             <SelectButtons/>
-            <br/>
             <StatisticPanelBigTop/>
             <Chart/>
+          </Col>
+        </Row>
+      </Grid>
+      <Grid fluid={true}>
+        <Row className="show-grid">
+          <Col sm={6}>
+            <ChatSmall/>
+          </Col>
+          <Col sm={6}>
+
           </Col>
         </Row>
       </Grid>

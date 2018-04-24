@@ -76,7 +76,7 @@
 }
 
 .selectButtonsStatistics div{
-  margin:0 20px;
+  margin:0 20px 20px;
 }
 
 .chart{
@@ -85,7 +85,7 @@
 }
 
 .chart canvas{
-  /* padding: 10px; */
+  height: 500px !important;
 }
 
 /* --- */
@@ -111,4 +111,8 @@
   position: relative;
   top: 10px;
   float: right;
+}
+
+.selects_top{
+  text-align: center;
 }

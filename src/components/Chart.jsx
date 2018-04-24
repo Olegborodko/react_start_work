@@ -84,7 +84,7 @@ class Chart extends Component {
       //scaleSteps : 10,
       //scaleStepWidth : 50,
       //scaleStartValue : 0
-
+      maintainAspectRatio: false,
       tooltips: {
         mode: 'index',
         intersect: false

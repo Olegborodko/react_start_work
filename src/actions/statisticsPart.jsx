@@ -29,6 +29,10 @@ export const statisticsPart =  function(data, dispatch, date_period){
   let date_format = '';
   let actions_template = 0;
 
+  let temp = 0;
+  let cost_per_action_array = [];
+  let average_action_price = 0;
+
   if (data && data.length>0){
     data.map((key, idx) => {
 
@@ -59,6 +63,15 @@ export const statisticsPart =  function(data, dispatch, date_period){
         spends_array.push(zeroOrNumber(spends_hash[key]));
         actions_array.push(zeroOrNumber(actions_hash[key]));
 
+        //=========
+        temp = parseInt(actions_hash[key]);
+        if (temp>0) {
+          cost_per_action_array.push((parseFloat(parseFloat(spends_hash[key]) / temp).toFixed(2)));
+        }else{
+          cost_per_action_array.push(0);
+        }
+        //=========
+
       });
     }
 
@@ -67,17 +80,24 @@ export const statisticsPart =  function(data, dispatch, date_period){
     spends_sum = spends_array.reduce((a, b) => a + b, 0);
     actions_sum = actions_array.reduce((a, b) => a + b, 0);
 
+    if (actions_sum>0) {
+      average_action_price = (parseFloat(spends_sum / actions_sum)).toFixed(2);
+    }
+
   }
 
   dispatch({type: 'CLICK_ARRAY', payload: clicks_array});
   dispatch({type: 'IMPRESSIONS_ARRAY', payload: impressions_array});
   dispatch({type: 'SPENDS_ARRAY', payload: spends_array});
   dispatch({type: 'ACTIONS_ARRAY', payload: actions_array});
+  dispatch({type: 'COST_PER_ACTION_ARRAY', payload: cost_per_action_array});
 
   dispatch({type: 'CLICKS_SUM', payload: clicks_sum});
   dispatch({type: 'IMPRESSIONS_SUM', payload: impressions_sum});
   dispatch({type: 'SPENDS_SUM', payload: spends_sum});
   dispatch({type: 'ACTIONS_SUM', payload: actions_sum});
+
+  dispatch({type: 'AVERAGE_ACTION_PRICE', payload:average_action_price});
 
 };
 
