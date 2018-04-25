@@ -8,6 +8,44 @@ export const zeroOrNumber = function(arg){
   }
 };
 
+export const procents = function(arraySetT, precentsT){
+
+  function getPercent(currentArray, firstElement, lastElement){
+    let tempPercentOne = 0;
+    let percentLast = 0;
+
+    if (currentArray[lastElement]===0 && currentArray[firstElement]===0){
+      return '0%';
+    }
+
+    if (currentArray.length>0) {
+      tempPercentOne = parseFloat(parseFloat(currentArray[firstElement]) / 100).toFixed(2);
+      if (tempPercentOne>0) {
+        percentLast = parseFloat(currentArray[lastElement] / tempPercentOne);
+        console.log('-----------------');
+        console.log(tempPercentOne);
+        return parseInt((percentLast - 100)).toString() + '%';
+      }
+    }
+    return '100%';
+  }
+
+  let result = precentsT;
+
+  if (arraySetT.length!==0) {
+    result.clicks = getPercent(arraySetT.clicks, 23, 24);
+    result.impressions = getPercent(arraySetT.impressions, 23, 24);
+    result.spends = getPercent(arraySetT.clicks, 23, 24);
+    result.actions = getPercent(arraySetT.clicks, 23, 24);
+    result.cost_per_action = getPercent(arraySetT.clicks, 23, 24);
+    result.click_through_rate = getPercent(arraySetT.clicks, 23, 24);
+    result.action_rate = getPercent(arraySetT.clicks, 23, 24);
+    return result;
+  }else{
+    return result;
+  }
+};
+
 export const allHash = function(data, allHashT){
   let result = allHashT;
 
@@ -109,6 +147,15 @@ export const statisticsPart =  function(data, dispatch, date_period){
     sum_action_rate: 0,
     action_rate: []
   };
+  let precentsT = {
+    clicks: '0%',
+    impressions: '0%',
+    spends: '0%',
+    actions: '0%',
+    cost_per_action: '0%',
+    click_through_rate: '0%',
+    action_rate: '0%'
+  };
 
   if (data && data.length>0){
     allHashT = allHash(data, allHashT);
@@ -132,6 +179,8 @@ export const statisticsPart =  function(data, dispatch, date_period){
     if (arraysSetT.countNotZero>0) {
       average_action_rate = parseFloat(arraysSetT.sum_action_rate / arraysSetT.countNotZero).toFixed(2);
     }
+
+    procentsT = procents(arraysSetT, precentsT);
 
   }
 
