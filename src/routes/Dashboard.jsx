@@ -52,7 +52,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    //  const {campaignsGlobal, initialApi, usersGlobal} = this.props;
+    const {g_chart} = this.props;
     return (
     <div>
       <FacebookLoginStatus
@@ -84,10 +84,42 @@ class Dashboard extends Component {
       <Grid fluid={true}>
         <Row className="show-grid">
           <Col sm={6}>
-            <ChatSmall/>
+            <ChatSmall
+              graphic = {g_chart.cost_per_action_array}
+              lineColor = 'rgba(92,161,71,1)'
+              commonNumber = {['$ ',g_chart.average_action_price]}
+              days = {g_chart.days}
+              label = 'COST PER ACTION'
+            />
           </Col>
           <Col sm={6}>
-
+            <ChatSmall
+            graphic = {g_chart.action_rate_array}
+            lineColor = 'rgba(255,17,134,1)'
+            commonNumber = {[g_chart.average_action_rate,' %']}
+            days = {g_chart.days}
+            label = 'ACTION RATE'
+            />
+          </Col>
+        </Row>
+        <Row className="show-grid">
+          <Col sm={6}>
+            <ChatSmall
+            graphic = {g_chart.clicks_array}
+            lineColor = 'rgba(255,78,39,1)'
+            commonNumber = {g_chart.clicks}
+            days = {g_chart.days}
+            label = 'CLICKS'
+            />
+          </Col>
+          <Col sm={6}>
+            <ChatSmall
+            graphic = {g_chart.click_through_rate_array}
+            lineColor = 'rgba(255,78,39,1)'
+            commonNumber = {[g_chart.average_click_through_rate, ' %']}
+            days = {g_chart.days}
+            label = 'CLICK THROUGH RATE'
+            />
           </Col>
         </Row>
       </Grid>
@@ -99,7 +131,8 @@ class Dashboard extends Component {
 export default connect(
 state => ({
   g_users: state.users,
-  g_currentUser: state.currentUser
+  g_currentUser: state.currentUser,
+  g_chart: state.chart
 }),
 dispatch => ({
   g_tokenChange: (token) => {

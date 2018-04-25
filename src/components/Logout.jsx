@@ -32,7 +32,6 @@ class Logout extends Component {
         cookies.remove('market_admin_co', { path: '/', secure: true });
         this_.props.g_tokenChange(null);
 
-        console.log(this_.props.facebook_logout);
         if (this_.props.facebook_logout===true) {
           window.FB.logout(function (response) {
             window.location = '/';

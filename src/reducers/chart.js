@@ -9,7 +9,11 @@ const initialState = {
   spends_array: [],
   actions_array: [],
   cost_per_action_array: [],
-  average_action_price: 0
+  average_action_price: 0,
+  click_through_rate_array: [],
+  average_click_through_rate: 0,
+  action_rate_array: [],
+  average_action_rate: 0
 };
 
 export default function ssss(state=initialState, action){
@@ -87,6 +91,34 @@ export default function ssss(state=initialState, action){
     return {
       ...state,
       average_action_price: action.payload
+    }
+  }
+
+  if (action.type === 'CLICK_THROUGH_RATE_ARRAY') {
+    return {
+      ...state,
+      click_through_rate_array: action.payload
+    }
+  }
+
+  if (action.type === 'AVERAGE_CLICK_THROUGH_RATE') {
+    return {
+      ...state,
+      average_click_through_rate: action.payload
+    }
+  }
+
+  if (action.type === 'ACTION_RATE_ARRAY') {
+    return {
+      ...state,
+      action_rate_array: action.payload
+    }
+  }
+
+  if (action.type === 'AVERAGE_ACTION_RATE') {
+    return {
+      ...state,
+      average_action_rate: action.payload
     }
   }
 

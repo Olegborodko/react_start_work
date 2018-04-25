@@ -26,21 +26,18 @@ class FacebookTest extends Component {
   }
 
   getStatus(response) {
-    console.log(response.authResponse);
     if (response.authResponse) {
       this.responseApi.call(this, response.authResponse);
     }
   }
 
   responseApi(res) {
-    console.log(res);
-    console.log('token:', res.accessToken);
 
     window.FB.api('/me/adaccounts', 'get', {access_token: res.accessToken}, (response) => {
       if (response.error) {
         console.log(response.error)
       }else{
-        console.log(response)
+
       }
 
     })

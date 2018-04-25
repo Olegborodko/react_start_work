@@ -49,7 +49,6 @@ class Login extends Component {
       }
     })
     .catch(function (response) {
-      console.log(response.response);
       if (response.response){
         this_.setState({
           error: response.response.data.error

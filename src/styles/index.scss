@@ -97,6 +97,7 @@
   border-right: 1px dotted darkgray;
   text-align:center;
   padding:20px 10px;
+  margin-top: 30px;
 }
 
 .bigTopPanel li{
@@ -115,4 +116,10 @@
 
 .selects_top{
   text-align: center;
+}
+
+/* --- */
+
+.chartSmall canvas{
+  height:400px!important;
 }

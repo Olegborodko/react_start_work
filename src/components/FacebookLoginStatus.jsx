@@ -52,7 +52,6 @@ class FacebookLoginStatus extends Component {
 
   statusChangeCallback(response){
     var this_=this;
-    console.log(response);
     if (response['status']==="connected"){
 
       window.FB.api('/me/adaccounts?fields=name', 'get', {access_token: response.authResponse.accessToken}, (response) => {
@@ -76,7 +75,6 @@ class FacebookLoginStatus extends Component {
         //browserHistory.push(this_.props.linkToLogin);
       }
 
-      console.log(response.authResponse===null);
       if (response.authResponse===null){
         this_.setState({
           error: 'Please Log out and then Log in again'

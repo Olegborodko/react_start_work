@@ -8,14 +8,14 @@ class ChartSmall extends Component {
   }
 
   render() {
-    const {g_chart} = this.props;
+    const {graphic,  lineColor, commonNumber, days, label} = this.props;
 
     var datasets_now = [];
     datasets_now.push(
     {
-      label: "Cost per action",
-      data: g_chart.cost_per_action_array,
-      borderColor: 'rgba(92,161,71,1)',
+      label: label,
+      data: graphic,  //
+      borderColor: lineColor,     //
       pointRadius: 5,
       pointHoverRadius: 10,
       backgroundColor: 'transparent'
@@ -24,7 +24,7 @@ class ChartSmall extends Component {
 
     var chartData = {
       type: 'line',
-      labels: g_chart.days,
+      labels: days,
       datasets: datasets_now,
     };
 
@@ -34,12 +34,15 @@ class ChartSmall extends Component {
       tooltips: {
         mode: 'index',
         intersect: false
+      },
+      legend: {
+        display: false
       }
     };
     return (
-    <div>
+    <div className="chartSmall">
       <ul className="bigTopPanel">
-        <li>{g_chart.average_action_price} $ <br/> COST PER ACTION</li>
+        <li>{commonNumber}  <br/> {label}</li>
       </ul>
       <div className="chart">
         <Line data={chartData} options={chartOptions} redraw/>
@@ -49,11 +52,4 @@ class ChartSmall extends Component {
   }
 }
 
-export default connect(
-state => ({
-  g_chart: state.chart
-}),
-dispatch => ({
-
-})
-)(ChartSmall);
+export default ChartSmall;
