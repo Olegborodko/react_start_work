@@ -52,7 +52,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    const {g_chart} = this.props;
+    const {g_chart, g_percents} = this.props;
     return (
     <div>
       <FacebookLoginStatus
@@ -87,18 +87,20 @@ class Dashboard extends Component {
             <ChatSmall
               graphic = {g_chart.cost_per_action_array}
               lineColor = 'rgba(92,161,71,1)'
-              commonNumber = {['$ ',g_chart.average_action_price]}
+              commonNumber = {['$',g_chart.average_action_price]}
               days = {g_chart.days}
               label = 'COST PER ACTION'
+              g_percents_array = {g_percents.cost_per_action}
             />
           </Col>
           <Col sm={6}>
             <ChatSmall
             graphic = {g_chart.action_rate_array}
             lineColor = 'rgba(255,17,134,1)'
-            commonNumber = {[g_chart.average_action_rate,' %']}
+            commonNumber = {[g_chart.average_action_rate,'%']}
             days = {g_chart.days}
             label = 'ACTION RATE'
+            g_percents_array = {g_percents.action_rate}
             />
           </Col>
         </Row>
@@ -110,15 +112,17 @@ class Dashboard extends Component {
             commonNumber = {g_chart.clicks}
             days = {g_chart.days}
             label = 'CLICKS'
+            g_percents_array = {g_percents.clicks}
             />
           </Col>
           <Col sm={6}>
             <ChatSmall
             graphic = {g_chart.click_through_rate_array}
             lineColor = 'rgba(255,78,39,1)'
-            commonNumber = {[g_chart.average_click_through_rate, ' %']}
+            commonNumber = {[g_chart.average_click_through_rate, '%']}
             days = {g_chart.days}
             label = 'CLICK THROUGH RATE'
+            g_percents_array = {g_percents.click_through_rate}
             />
           </Col>
         </Row>
@@ -132,7 +136,8 @@ export default connect(
 state => ({
   g_users: state.users,
   g_currentUser: state.currentUser,
-  g_chart: state.chart
+  g_chart: state.chart,
+  g_percents: state.chartPercent
 }),
 dispatch => ({
   g_tokenChange: (token) => {

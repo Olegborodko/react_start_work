@@ -8,6 +8,7 @@ import ads from './ads.js';
 import urlHistory from './urlHistory.js';
 import adverts from './adverts';
 import chart from './chart';
+import chartPercent from './chartPercents';
 
 export default combineReducers({
   routing: routerReducer,
@@ -17,5 +18,6 @@ export default combineReducers({
   ads,
   urlHistory,
   adverts,
-  chart
+  chart,
+  chartPercent
 });

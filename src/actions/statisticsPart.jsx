@@ -13,33 +13,43 @@ export const procents = function(arraySetT, precentsT){
   function getPercent(currentArray, firstElement, lastElement){
     let tempPercentOne = 0;
     let percentLast = 0;
+    let tempResult = '';
 
     if (currentArray[lastElement]===0 && currentArray[firstElement]===0){
-      return '0%';
+      return ['0%',''];
     }
 
     if (currentArray.length>0) {
       tempPercentOne = parseFloat(parseFloat(currentArray[firstElement]) / 100).toFixed(2);
       if (tempPercentOne>0) {
         percentLast = parseFloat(currentArray[lastElement] / tempPercentOne);
-        console.log('-----------------');
-        console.log(tempPercentOne);
-        return parseInt((percentLast - 100)).toString() + '%';
+        if ((percentLast - 100)>0){
+          tempResult = 'percent_up';
+        }
+        if ((percentLast - 100)<0){
+          tempResult = 'percent_down';
+        }
+        if ((percentLast - 100)===0){
+          tempResult = '';
+        }
+        return [parseInt((percentLast - 100)).toString() + '%',tempResult];
       }
     }
-    return '100%';
+    return ['100%','percent_up'];
   }
 
   let result = precentsT;
+  let lengthArrayMinusOne = 0;
 
   if (arraySetT.length!==0) {
-    result.clicks = getPercent(arraySetT.clicks, 23, 24);
-    result.impressions = getPercent(arraySetT.impressions, 23, 24);
-    result.spends = getPercent(arraySetT.clicks, 23, 24);
-    result.actions = getPercent(arraySetT.clicks, 23, 24);
-    result.cost_per_action = getPercent(arraySetT.clicks, 23, 24);
-    result.click_through_rate = getPercent(arraySetT.clicks, 23, 24);
-    result.action_rate = getPercent(arraySetT.clicks, 23, 24);
+    lengthArrayMinusOne = arraySetT.clicks.length-1;
+    result.clicks = getPercent(arraySetT.clicks, 0, lengthArrayMinusOne);
+    result.impressions = getPercent(arraySetT.impressions, 0, lengthArrayMinusOne);
+    result.spends = getPercent(arraySetT.spends, 0, lengthArrayMinusOne);
+    result.actions = getPercent(arraySetT.actions, 0, lengthArrayMinusOne);
+    result.cost_per_action = getPercent(arraySetT.cost_per_action, 0, lengthArrayMinusOne);
+    result.click_through_rate = getPercent(arraySetT.click_through_rate, 0, lengthArrayMinusOne);
+    result.action_rate = getPercent(arraySetT.action_rate, 0, lengthArrayMinusOne);
     return result;
   }else{
     return result;
@@ -147,14 +157,14 @@ export const statisticsPart =  function(data, dispatch, date_period){
     sum_action_rate: 0,
     action_rate: []
   };
-  let precentsT = {
-    clicks: '0%',
-    impressions: '0%',
-    spends: '0%',
-    actions: '0%',
-    cost_per_action: '0%',
-    click_through_rate: '0%',
-    action_rate: '0%'
+  var precentsT = {
+    clicks: ['0%',''],
+    impressions: ['0%',''],
+    spends: ['0%',''],
+    actions: ['0%',''],
+    cost_per_action: ['0%',''],
+    click_through_rate: ['0%',''],
+    action_rate: ['0%','']
   };
 
   if (data && data.length>0){
@@ -180,7 +190,7 @@ export const statisticsPart =  function(data, dispatch, date_period){
       average_action_rate = parseFloat(arraysSetT.sum_action_rate / arraysSetT.countNotZero).toFixed(2);
     }
 
-    procentsT = procents(arraysSetT, precentsT);
+    precentsT = procents(arraysSetT, precentsT);
 
   }
 
@@ -200,6 +210,14 @@ export const statisticsPart =  function(data, dispatch, date_period){
   dispatch({type: 'AVERAGE_ACTION_PRICE', payload:average_action_price});
   dispatch({type: 'AVERAGE_CLICK_THROUGH_RATE', payload:average_click_through_rate});
   dispatch({type: 'AVERAGE_ACTION_RATE', payload:average_action_rate});
+  
+  dispatch({type: 'PERCENT_CLICKS', payload: precentsT.clicks});
+  dispatch({type: 'PERCENT_IMPRESSIONS', payload: precentsT.impressions});
+  dispatch({type: 'PERCENT_SPENDS', payload: precentsT.spends});
+  dispatch({type: 'PERCENT_ACTIONS', payload: precentsT.actions});
+  dispatch({type: 'PERCENT_COST_PER_ACTION', payload: precentsT.cost_per_action});
+  dispatch({type: 'PERCENT_CLICK_THROUGH_RATE', payload: precentsT.click_through_rate});
+  dispatch({type: 'PERCENT_ACTION_RATE', payload: precentsT.action_rate});
 
 };
 

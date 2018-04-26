@@ -20,7 +20,7 @@ class StatisticPanelBigTop extends Component {
   }
 
   render() {
-    const {g_chart} = this.props;
+    const {g_chart, g_percents} = this.props;
     // var actionsSum = 0;
     // if (g_statistic.length>0){
     //   g_statistic.map((key, idx) => {
@@ -31,10 +31,30 @@ class StatisticPanelBigTop extends Component {
     return (
     <div>
       <ul className="bigTopPanel">
-        <li>{(g_chart.spends).toFixed(2)} <br/> COST</li>
-        <li>{g_chart.impressions} <br/> IMPRESSIONS</li>
-        <li>{g_chart.clicks} <br/> CLICKS</li>
-        <li>{g_chart.actions} <br/> ACTIONS</li>
+        <li>
+          <span className="statisticBig">${(g_chart.spends).toFixed(2)}</span>
+          <span className={"statisticSmall " + g_percents.spends[1]}>{g_percents.spends[0]}</span>
+          <br/>
+          COST
+        </li>
+        <li>
+          <span className="statisticBig">{g_chart.impressions}</span>
+          <span className={'statisticSmall ' + g_percents.impressions[1]}>{g_percents.impressions[0]}</span>
+          <br/>
+          IMPRESSIONS
+        </li>
+        <li>
+          <span className="statisticBig">{g_chart.clicks}</span>
+          <span className={"statisticSmall " + g_percents.clicks[1]}>{g_percents.clicks[0]}</span>
+          <br/>
+          CLICKS
+        </li>
+        <li>
+          <span className="statisticBig">{g_chart.actions}</span>
+          <span className={"statisticSmall " + g_percents.actions[1]}>{g_percents.actions[0]}</span>
+          <br/>
+          ACTIONS
+        </li>
       </ul>
     </div>
     );
@@ -43,7 +63,8 @@ class StatisticPanelBigTop extends Component {
 
 export default connect(
 state => ({
-  g_chart: state.chart
+  g_chart: state.chart,
+  g_percents: state.chartPercent
 }),
 dispatch => ({
   // g_tokenChange: (token) => {
