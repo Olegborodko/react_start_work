@@ -19,7 +19,8 @@ class FacebookBtn extends Component {
          data-button-type="login_with"
          data-show-faces="false"
          data-auto-logout-link="true"
-         data-use-continue-as="false">
+         data-use-continue-as="false"
+         scope="email,ads_read,public_profile">
       </div>
     );
   }

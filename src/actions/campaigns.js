@@ -1,6 +1,9 @@
 import { g_adsRequest } from './ads';
 
 export const g_campaignsRequest = (g_users, userIndex, campaignIndex, adIndex) => dispatch => {
+  if (g_users.length===0){
+    return;
+  }
   var ad_account_id = g_users[userIndex].id;
 
   //fields=name,objective
