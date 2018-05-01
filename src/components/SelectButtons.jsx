@@ -39,13 +39,13 @@ class SelectButtons extends Component {
     return (
     <div className="selectButtonsStatistics">
       {g_campaigns.length !== 0 &&
-        <div className="btn_class" onClick={this.company_Statistics}>Company statistics</div>
+        <div className="sign_in" onClick={this.company_Statistics}>Company statistics</div>
       }
       {g_ads.length !== 0 &&
-        <div className="btn_class" onClick={this.ads_Statistics}>Advertises statistics</div>
+        <div className="sign_in" onClick={this.ads_Statistics}>Advertises statistics</div>
       }
       {g_ad.length !== 0 &&
-        <div className="btn_class" onClick={this.advertise_Statistics}>Advertise statistics </div>
+        <div className="sign_in" onClick={this.advertise_Statistics}>Advertise statistics </div>
       }
     </div>
     );

@@ -38,15 +38,12 @@
 
 .error{
   color:red;
-  margin-top:10px;
+  text-align: center;
+  margin-top: 20px;
 }
 
-.form_login input{
-  padding: 4px 10px;
-}
-
-.form_login li{
-  margin-bottom:10px;
+.error::first-letter {
+  text-transform: capitalize;
 }
 
 .fb-login-button{
@@ -152,4 +149,90 @@
   bottom: 0;
   border: 5px solid transparent;
   border-bottom: 10px solid green;
+}
+
+/* --- */
+
+.form_login {
+  max-width: 350px;
+  margin: 0 auto;
+
+  .logo img{
+    margin-top:20px;
+    width:100%;
+  }
+
+  li {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .li_email {
+    margin-top: 40px;
+  }
+
+  .li_password {
+    margin-top: 10px;
+  }
+
+  input {
+    padding: 6px 10px;
+    font-size: 16px;
+    background: #FFFFFF;
+  }
+
+  input, .sign_in{
+    max-width: 250px;
+    width:100%;
+  }
+}
+
+.sign_in {
+  font-size: 16px;
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  color: #000000;
+  padding: 10px 30px;
+  min-width: 210px;
+  font-weight: 700;
+  cursor:pointer;
+  display:inline-block;
+  border-radius:4px;
+}
+
+.sign_in:hover{
+  background: #000000;
+  color: #FFFFFF;
+}
+
+/* --- */
+
+.facebook_block{
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* --- */
+
+.dashboard_select select{
+  background:#FFFFFF;
+  color:#000000;
+  font-size: 15px;
+  font-weight: 700;
+  border: 1px solid #000000;
+  padding: 10px 20px;
+}
+
+.dashboard_select select option{
+  color:#000000;
+  font-weight:600;
+  background:#FFFFFF;
+  display:inline-block;
+  font-size:15px;
+  line-height:2%;
 }

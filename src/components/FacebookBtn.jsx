@@ -13,15 +13,15 @@ class FacebookBtn extends Component {
 
   render() {
     return (
-      <div className="fb-login-button"
-         data-max-rows="1"
-         data-size="medium"
-         data-button-type="login_with"
-         data-show-faces="false"
-         data-auto-logout-link="true"
-         data-use-continue-as="false"
-         scope="email,ads_read,public_profile">
-      </div>
+        <div className="fb-login-button"
+           data-max-rows="1"
+           data-size="medium"
+           data-button-type="login_with"
+           data-show-faces="false"
+           data-auto-logout-link="true"
+           data-use-continue-as="false"
+           scope="email,ads_read,public_profile">
+        </div>
     );
   }
 }

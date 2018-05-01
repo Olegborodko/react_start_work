@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
+import logo from '../images/juice-logo.png';
 
 const cookies = new Cookies();
 var axios = require('axios');
@@ -72,24 +73,24 @@ class Login extends Component {
           <form onSubmit={this.handleSubmit} className="form_login">
             <ul>
               <li className="logo">
-                Logo
+                <img src={logo}/>
               </li>
-              <li>
+              <li className="li_email">
                 <input
                 type="text"
                 placeholder="E-mail"
                 ref="email_input"
                 />
               </li>
-              <li>
+              <li className="li_password">
                 <input
                 type="password"
                 placeholder="Password"
                 ref="password_input"
                 />
               </li>
-              <li>
-                <button>Sign In</button>
+              <li className="li_signIn">
+                <button className="sign_in">Sign In</button>
               </li>
             </ul>
           </form>

@@ -90,7 +90,7 @@ class FacebookLoginStatus extends Component {
   render() {
     const {error} = this.state;
     return (
-    <div>{error}</div>
+    <div className="error">{error}</div>
     );
   }
 }

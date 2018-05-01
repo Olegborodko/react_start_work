@@ -65,8 +65,6 @@ class Dashboard extends Component {
         <Row className="show-grid">
           <Col sm={12}>
             <Logout facebook_logout={true}/>
-            <br/><br/>
-            Dashboard
           </Col>
         </Row>
       </Grid>
