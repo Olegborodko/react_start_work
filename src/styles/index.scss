@@ -236,3 +236,20 @@
   font-size:15px;
   line-height:2%;
 }
+
+/* --- */
+
+.ads_table {
+  border: 1px dotted darkgray;
+  width: 100%;
+  margin: 20px 0;
+
+  td {
+    padding: 10px;
+  }
+
+  .t_title td {
+    font-weight: 700;
+    border-bottom: 1px dotted darkgray;
+  }
+}

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FacebookBtn from '../components/FacebookBtn.jsx';
 import FacebookLoginStatus from '../components/FacebookLoginStatus.jsx';
-import { Grid, Row, Col } from 'react-bootstrap';
 
 class Facebook extends Component {
   render() {

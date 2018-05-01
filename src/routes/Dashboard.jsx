@@ -9,6 +9,7 @@ import Chart from '../components/Chart';
 import SelectButtons from '../components/SelectButtons';
 import StatisticPanelBigTop from '../components/StatisticPanelBigTop';
 import ChatSmall from '../components/ChartSmall';
+import AdsTable from '../components/AdsTable';
 
 const cookies = new Cookies();
 var axios = require('axios');
@@ -122,6 +123,11 @@ class Dashboard extends Component {
             label = 'CLICK THROUGH RATE'
             g_percents_array = {g_percents.click_through_rate}
             />
+          </Col>
+        </Row>
+        <Row className="show-grid">
+          <Col sm={12}>
+            <AdsTable/>
           </Col>
         </Row>
       </Grid>

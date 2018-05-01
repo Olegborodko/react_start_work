@@ -22,13 +22,13 @@ export const g_Statistics = (g_set, index) => dispatch => {
         } else {
           if (response) {
             if (response.data) {
-              dispatch({type: 'STATISTICS_CHANGE', payload: response.data});
+              //console.log(response.data);
 
               let date_period = dateStep(date_step.start, date_step.end);
               dispatch({type: 'CHART_DAYS', payload: date_period});
 
               //console.log(dateFormat(date_step.end));
-              console.log(response.data);
+              //console.log(response.data);
 
               statisticsPart(response.data, dispatch, date_period);
             }
